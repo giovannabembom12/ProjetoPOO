@@ -1,0 +1,33 @@
+package com.view; 
+ import java.awt.*; 
+ import javax.swing.*; 
+  
+ public class SplashScreen extends JFrame{ 
+         private int duracao; 
+  
+         public SplashScreen(int duracao) {  
+                 this.duracao=duracao; 
+                 ConstroiSplash(); 
+         } 
+  
+         private void ConstroiSplash() {                 
+                 JPanel content = (JPanel)getContentPane(); 
+                 setTitle(""); 
+                 Color ? =new Color();  
+                 content.setBackground();                 
+  
+                 Toolkit toolkit = Toolkit.getDefaultToolkit(); 
+                 Dimension screenSize = toolkit.getScreenSize(); 
+                 setBounds(0, 0, screenSize.width, screenSize.height-40); 
+  
+         JLabel lblLogo = new JLabel(new ImageIcon("")); 
+                 content.add(lblLogo, BorderLayout.CENTER); 
+  
+         setVisible(true); 
+         try {  
+                 Thread.sleep(duracao); 
+         } catch (Exception e) {}         
+         setVisible(false);         
+  
+         } 
+ }

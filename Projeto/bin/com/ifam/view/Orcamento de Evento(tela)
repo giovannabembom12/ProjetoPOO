@@ -1,0 +1,288 @@
+package com.view;
+
+public class OrcamentoDeEvento extends javax.swing.JFrame {
+
+    public OrcamentoDeEvento() {
+        initComponents();
+    }
+
+  
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jpnAzuExterno = new javax.swing.JPanel();
+        jpnPainelBrancoInterno = new javax.swing.JPanel();
+        btnBotaoVoltar = new javax.swing.JButton();
+        jpnPainelBrancoQueMostraOCalculo = new javax.swing.JPanel();
+        jpnPainelAzulQueMostraOTotal = new javax.swing.JPanel();
+        lblTotal = new javax.swing.JLabel();
+        lblTotalDosValores = new javax.swing.JLabel();
+        jpnPanelDoEvento = new javax.swing.JPanel();
+        jSeparator4sprtSeparadorVertcialDoEvento = new javax.swing.JSeparator();
+        lblEvento = new javax.swing.JLabel();
+        lblMostraONomeDoEvento = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jpnPanelDoCliente = new javax.swing.JPanel();
+        lblCliente = new javax.swing.JLabel();
+        sprtSeparadorVertcialDoCliente = new javax.swing.JSeparator();
+        lblMostraONomeDoCliente = new javax.swing.JLabel();
+        lblControleFinanceiro = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Orçamento de Evento");
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnAzuExterno.setBackground(new java.awt.Color(22, 43, 64));
+        jpnAzuExterno.setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnPainelBrancoInterno.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelBrancoInterno.setToolTipText("");
+
+        btnBotaoVoltar.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoVoltar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnBotaoVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoVoltar.setText("Voltar");
+
+        jpnPainelBrancoQueMostraOCalculo.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelBrancoQueMostraOCalculo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpnPainelBrancoQueMostraOCalculo.setForeground(new java.awt.Color(0, 0, 0));
+
+        jpnPainelAzulQueMostraOTotal.setBackground(new java.awt.Color(22, 43, 64));
+
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotal.setText("Total:");
+
+        javax.swing.GroupLayout jpnPainelAzulQueMostraOTotalLayout = new javax.swing.GroupLayout(jpnPainelAzulQueMostraOTotal);
+        jpnPainelAzulQueMostraOTotal.setLayout(jpnPainelAzulQueMostraOTotalLayout);
+        jpnPainelAzulQueMostraOTotalLayout.setHorizontalGroup(
+            jpnPainelAzulQueMostraOTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulQueMostraOTotalLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(lblTotal)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        jpnPainelAzulQueMostraOTotalLayout.setVerticalGroup(
+            jpnPainelAzulQueMostraOTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelAzulQueMostraOTotalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTotal)
+                .addGap(15, 15, 15))
+        );
+
+        lblTotalDosValores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTotalDosValores.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jpnPainelBrancoQueMostraOCalculoLayout = new javax.swing.GroupLayout(jpnPainelBrancoQueMostraOCalculo);
+        jpnPainelBrancoQueMostraOCalculo.setLayout(jpnPainelBrancoQueMostraOCalculoLayout);
+        jpnPainelBrancoQueMostraOCalculoLayout.setHorizontalGroup(
+            jpnPainelBrancoQueMostraOCalculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoQueMostraOCalculoLayout.createSequentialGroup()
+                .addComponent(jpnPainelAzulQueMostraOTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotalDosValores, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpnPainelBrancoQueMostraOCalculoLayout.setVerticalGroup(
+            jpnPainelBrancoQueMostraOCalculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelBrancoQueMostraOCalculoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpnPainelAzulQueMostraOTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jpnPainelBrancoQueMostraOCalculoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalDosValores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnPanelDoEvento.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPanelDoEvento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jSeparator4sprtSeparadorVertcialDoEvento.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblEvento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEvento.setForeground(new java.awt.Color(0, 0, 0));
+        lblEvento.setText("Evento");
+
+        lblMostraONomeDoEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMostraONomeDoEvento.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jpnPanelDoEventoLayout = new javax.swing.GroupLayout(jpnPanelDoEvento);
+        jpnPanelDoEvento.setLayout(jpnPanelDoEventoLayout);
+        jpnPanelDoEventoLayout.setHorizontalGroup(
+            jpnPanelDoEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPanelDoEventoLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator4sprtSeparadorVertcialDoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMostraONomeDoEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnPanelDoEventoLayout.setVerticalGroup(
+            jpnPanelDoEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator4sprtSeparadorVertcialDoEvento)
+            .addGroup(jpnPanelDoEventoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnPanelDoEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPanelDoEventoLayout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(lblEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMostraONomeDoEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jpnPanelDoCliente.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPanelDoCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCliente.setForeground(new java.awt.Color(0, 0, 0));
+        lblCliente.setText("Cliente");
+
+        sprtSeparadorVertcialDoCliente.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblMostraONomeDoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMostraONomeDoCliente.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jpnPanelDoClienteLayout = new javax.swing.GroupLayout(jpnPanelDoCliente);
+        jpnPanelDoCliente.setLayout(jpnPanelDoClienteLayout);
+        jpnPanelDoClienteLayout.setHorizontalGroup(
+            jpnPanelDoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPanelDoClienteLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sprtSeparadorVertcialDoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMostraONomeDoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnPanelDoClienteLayout.setVerticalGroup(
+            jpnPanelDoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sprtSeparadorVertcialDoCliente)
+            .addGroup(jpnPanelDoClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnPanelDoClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPanelDoClienteLayout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMostraONomeDoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        lblControleFinanceiro.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblControleFinanceiro.setForeground(new java.awt.Color(0, 0, 0));
+        lblControleFinanceiro.setText("Controle Financeiro");
+
+        javax.swing.GroupLayout jpnPainelBrancoInternoLayout = new javax.swing.GroupLayout(jpnPainelBrancoInterno);
+        jpnPainelBrancoInterno.setLayout(jpnPainelBrancoInternoLayout);
+        jpnPainelBrancoInternoLayout.setHorizontalGroup(
+            jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelBrancoInternoLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpnPainelBrancoInternoLayout.createSequentialGroup()
+                        .addComponent(lblControleFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 435, Short.MAX_VALUE)
+                        .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpnPanelDoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpnPanelDoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnPainelBrancoInternoLayout.createSequentialGroup()
+                        .addComponent(btnBotaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpnPainelBrancoQueMostraOCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(51, 51, 51))
+            .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnPainelBrancoInternoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jpnPainelBrancoInternoLayout.setVerticalGroup(
+            jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoInternoLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnPainelBrancoInternoLayout.createSequentialGroup()
+                        .addComponent(jpnPanelDoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpnPanelDoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblControleFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(517, 517, 517)
+                .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpnPainelBrancoQueMostraOCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBotaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpnPainelBrancoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnPainelBrancoInternoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout jpnAzuExternoLayout = new javax.swing.GroupLayout(jpnAzuExterno);
+        jpnAzuExterno.setLayout(jpnAzuExternoLayout);
+        jpnAzuExternoLayout.setHorizontalGroup(
+            jpnAzuExternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnAzuExternoLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jpnPainelBrancoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+        jpnAzuExternoLayout.setVerticalGroup(
+            jpnAzuExternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnAzuExternoLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jpnPainelBrancoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(196, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnAzuExterno, javax.swing.GroupLayout.PREFERRED_SIZE, 1750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnAzuExterno, javax.swing.GroupLayout.PREFERRED_SIZE, 981, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    public static void main(String args[]) {
+       
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new OrcamentoDeEvento().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnBotaoVoltar;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4sprtSeparadorVertcialDoEvento;
+    private javax.swing.JPanel jpnAzuExterno;
+    private javax.swing.JPanel jpnPainelAzulQueMostraOTotal;
+    private javax.swing.JPanel jpnPainelBrancoInterno;
+    private javax.swing.JPanel jpnPainelBrancoQueMostraOCalculo;
+    private javax.swing.JPanel jpnPanelDoCliente;
+    private javax.swing.JPanel jpnPanelDoEvento;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblControleFinanceiro;
+    private javax.swing.JLabel lblEvento;
+    private javax.swing.JLabel lblMostraONomeDoCliente;
+    private javax.swing.JLabel lblMostraONomeDoEvento;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalDosValores;
+    private javax.swing.JSeparator sprtSeparadorVertcialDoCliente;
+    // End of variables declaration                   
+}

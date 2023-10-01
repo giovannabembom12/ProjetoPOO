@@ -1,0 +1,6 @@
+CREATE TABLE tbassociado(
+nome INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(30) NOT NULL,
+segmento VARCHAR(15) NOT NULL,
+contato CHAR(11)
+);

@@ -1,0 +1,227 @@
+
+public class TelaInicialView extends javax.swing.JFrame {
+
+    public TelaInicialView() {
+        initComponents();
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jpnPainelAzulInferior = new javax.swing.JPanel();
+        jpnPainelBrancoSuperior = new javax.swing.JPanel();
+        btnBotaoSobreNos = new javax.swing.JButton();
+        btnBotaoConfiguracoesESuporte = new javax.swing.JButton();
+        lblTaskTide = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        jpnPainelBrancoFuncionario = new javax.swing.JPanel();
+        lblLilianAlmeida = new javax.swing.JLabel();
+        lblFuncionario = new javax.swing.JLabel();
+        jpnPainelBrancoComOsBotoes = new javax.swing.JPanel();
+        btnBotaoAssociados = new javax.swing.JButton();
+        btnBotaoCalendario = new javax.swing.JButton();
+        btnBotaoFinancas = new javax.swing.JButton();
+        btnBotaoRelatorios = new javax.swing.JButton();
+        btnBotaoConsumo = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Inicial");
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnPainelAzulInferior.setBackground(new java.awt.Color(22, 43, 64));
+        jpnPainelAzulInferior.setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnPainelBrancoSuperior.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelBrancoSuperior.setPreferredSize(new java.awt.Dimension(1926, 80));
+        jpnPainelBrancoSuperior.setVerifyInputWhenFocusTarget(false);
+        jpnPainelBrancoSuperior.setLayout(null);
+
+        btnBotaoSobreNos.setBackground(new java.awt.Color(255, 255, 255));
+        btnBotaoSobreNos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBotaoSobreNos.setForeground(new java.awt.Color(0, 0, 0));
+        btnBotaoSobreNos.setText("SOBRE NÓS");
+        btnBotaoSobreNos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBotaoSobreNosActionPerformed(evt);
+            }
+        });
+        jpnPainelBrancoSuperior.add(btnBotaoSobreNos);
+        btnBotaoSobreNos.setBounds(490, 30, 200, 30);
+
+        btnBotaoConfiguracoesESuporte.setBackground(new java.awt.Color(255, 255, 255));
+        btnBotaoConfiguracoesESuporte.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBotaoConfiguracoesESuporte.setForeground(new java.awt.Color(0, 0, 0));
+        btnBotaoConfiguracoesESuporte.setText("CONFIGURAÇÕES E SUPORTE");
+        jpnPainelBrancoSuperior.add(btnBotaoConfiguracoesESuporte);
+        btnBotaoConfiguracoesESuporte.setBounds(760, 30, 300, 30);
+
+        lblTaskTide.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTaskTide.setForeground(new java.awt.Color(0, 0, 0));
+        lblTaskTide.setText("TaskTide");
+        jpnPainelBrancoSuperior.add(lblTaskTide);
+        lblTaskTide.setBounds(100, 30, 100, 30);
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder/Design sem nome (2).png"))); // NOI18N
+        jpnPainelBrancoSuperior.add(lblLogo);
+        lblLogo.setBounds(-20, -10, 140, 100);
+
+        jpnPainelBrancoFuncionario.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblLilianAlmeida.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblLilianAlmeida.setForeground(new java.awt.Color(0, 0, 0));
+        lblLilianAlmeida.setText("Lilian Almeida");
+
+        lblFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblFuncionario.setForeground(new java.awt.Color(0, 0, 0));
+        lblFuncionario.setText("Funcionário");
+
+        javax.swing.GroupLayout jpnPainelBrancoFuncionarioLayout = new javax.swing.GroupLayout(jpnPainelBrancoFuncionario);
+        jpnPainelBrancoFuncionario.setLayout(jpnPainelBrancoFuncionarioLayout);
+        jpnPainelBrancoFuncionarioLayout.setHorizontalGroup(
+            jpnPainelBrancoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoFuncionarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnPainelBrancoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelBrancoFuncionarioLayout.createSequentialGroup()
+                        .addComponent(lblFuncionario)
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelBrancoFuncionarioLayout.createSequentialGroup()
+                        .addComponent(lblLilianAlmeida, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))))
+        );
+        jpnPainelBrancoFuncionarioLayout.setVerticalGroup(
+            jpnPainelBrancoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoFuncionarioLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lblLilianAlmeida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        jpnPainelBrancoComOsBotoes.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelBrancoComOsBotoes.setForeground(new java.awt.Color(255, 255, 255));
+
+        btnBotaoAssociados.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoAssociados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBotaoAssociados.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoAssociados.setText("Associados");
+
+        btnBotaoCalendario.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoCalendario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBotaoCalendario.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoCalendario.setText("Calendário");
+
+        btnBotaoFinancas.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoFinancas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBotaoFinancas.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoFinancas.setText("Finanças");
+
+        btnBotaoRelatorios.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoRelatorios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBotaoRelatorios.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoRelatorios.setText("Relatórios");
+
+        btnBotaoConsumo.setBackground(new java.awt.Color(22, 43, 64));
+        btnBotaoConsumo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBotaoConsumo.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotaoConsumo.setText("Consumo");
+
+        javax.swing.GroupLayout jpnPainelBrancoComOsBotoesLayout = new javax.swing.GroupLayout(jpnPainelBrancoComOsBotoes);
+        jpnPainelBrancoComOsBotoes.setLayout(jpnPainelBrancoComOsBotoesLayout);
+        jpnPainelBrancoComOsBotoesLayout.setHorizontalGroup(
+            jpnPainelBrancoComOsBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoComOsBotoesLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jpnPainelBrancoComOsBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBotaoCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBotaoAssociados, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBotaoFinancas, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBotaoRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBotaoConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jpnPainelBrancoComOsBotoesLayout.setVerticalGroup(
+            jpnPainelBrancoComOsBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelBrancoComOsBotoesLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(btnBotaoCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnBotaoAssociados, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(btnBotaoFinancas, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnBotaoRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnBotaoConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+
+        javax.swing.GroupLayout jpnPainelAzulInferiorLayout = new javax.swing.GroupLayout(jpnPainelAzulInferior);
+        jpnPainelAzulInferior.setLayout(jpnPainelAzulInferiorLayout);
+        jpnPainelAzulInferiorLayout.setHorizontalGroup(
+            jpnPainelAzulInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpnPainelBrancoSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 1926, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jpnPainelAzulInferiorLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jpnPainelAzulInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpnPainelBrancoFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnPainelBrancoComOsBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jpnPainelAzulInferiorLayout.setVerticalGroup(
+            jpnPainelAzulInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulInferiorLayout.createSequentialGroup()
+                .addComponent(jpnPainelBrancoSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jpnPainelBrancoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jpnPainelBrancoComOsBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 355, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpnPainelAzulInferior, javax.swing.GroupLayout.DEFAULT_SIZE, 1926, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnPainelAzulInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 1154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void btnBotaoSobreNosActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    public static void main(String args[]) {
+      
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaInicialView().setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnBotaoAssociados;
+    private javax.swing.JButton btnBotaoCalendario;
+    private javax.swing.JButton btnBotaoConfiguracoesESuporte;
+    private javax.swing.JButton btnBotaoConsumo;
+    private javax.swing.JButton btnBotaoFinancas;
+    private javax.swing.JButton btnBotaoRelatorios;
+    private javax.swing.JButton btnBotaoSobreNos;
+    private javax.swing.JPanel jpnPainelAzulInferior;
+    private javax.swing.JPanel jpnPainelBrancoComOsBotoes;
+    private javax.swing.JPanel jpnPainelBrancoFuncionario;
+    private javax.swing.JPanel jpnPainelBrancoSuperior;
+    private javax.swing.JLabel lblFuncionario;
+    private javax.swing.JLabel lblLilianAlmeida;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblTaskTide;
+    // End of variables declaration                   
+}

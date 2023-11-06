@@ -1,0 +1,581 @@
+package com;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+
+
+public class FinancasView extends javax.swing.JFrame {
+
+    public FinancasView() {
+        initComponents();
+    }
+                         
+    private void initComponents() {
+
+        jpnPainelAzulExterno = new javax.swing.JPanel();
+        jpnMenuBranco = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        lblTaskTide = new javax.swing.JLabel();
+        btnManualDoUsuario = new javax.swing.JButton();
+        btnSobreNos = new javax.swing.JButton();
+        btnConfiguracoesESuporte = new javax.swing.JButton();
+        jpnPainelBrancoInterno = new javax.swing.JPanel();
+        lblOrcamentoDaEmpresa = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbTabelaDeFinancas = new javax.swing.JTable();
+        lblSelecioneOAno = new javax.swing.JLabel();
+        jcbEscolhaDoAno = new javax.swing.JComboBox<>();
+        lblSelecioneOMes = new javax.swing.JLabel();
+        jcbEscolhaDoMes = new javax.swing.JComboBox<>();
+        btnVoltar = new javax.swing.JButton();
+        jpnPainelAzulDoTotal = new javax.swing.JPanel();
+        lblTotal = new javax.swing.JLabel();
+        jpnPainelDoValor = new javax.swing.JPanel();
+        lblMostraTotal = new javax.swing.JLabel();
+        jpnPainelAzulDoTotal1 = new javax.swing.JPanel();
+        lblLucro = new javax.swing.JLabel();
+        jpnPainelDoValor1 = new javax.swing.JPanel();
+        lblMostraOLucro = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jpnPainelAzulExterno.setBackground(new java.awt.Color(22, 43, 64));
+        jpnPainelAzulExterno.setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnMenuBranco.setBackground(new java.awt.Color(255, 255, 255));
+        jpnMenuBranco.setLayout(null);
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Sobre nós");
+        jButton2.setBorder(null);
+        jpnMenuBranco.add(jButton2);
+        jButton2.setBounds(440, 96, 67, 27);
+
+        lblTaskTide.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblTaskTide.setForeground(new java.awt.Color(0, 0, 0));
+        lblTaskTide.setText("TaskTide");
+        jpnMenuBranco.add(lblTaskTide);
+        lblTaskTide.setBounds(130, 30, 110, 30);
+
+        btnManualDoUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        btnManualDoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnManualDoUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        btnManualDoUsuario.setText("Manual do Usuário");
+        btnManualDoUsuario.setBorder(null);
+        btnManualDoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManualDoUsuarioActionPerformed(evt);
+            }
+        });
+        jpnMenuBranco.add(btnManualDoUsuario);
+        btnManualDoUsuario.setBounds(980, 30, 180, 30);
+
+        btnSobreNos.setBackground(new java.awt.Color(255, 255, 255));
+        btnSobreNos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSobreNos.setForeground(new java.awt.Color(0, 0, 0));
+        btnSobreNos.setText("Sobre nós");
+        btnSobreNos.setBorder(null);
+        jpnMenuBranco.add(btnSobreNos);
+        btnSobreNos.setBounds(410, 30, 80, 30);
+
+        btnConfiguracoesESuporte.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfiguracoesESuporte.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnConfiguracoesESuporte.setForeground(new java.awt.Color(0, 0, 0));
+        btnConfiguracoesESuporte.setText("Configurações e suporte");
+        btnConfiguracoesESuporte.setBorder(null);
+        btnConfiguracoesESuporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracoesESuporteActionPerformed(evt);
+            }
+        });
+        jpnMenuBranco.add(btnConfiguracoesESuporte);
+        btnConfiguracoesESuporte.setBounds(660, 30, 180, 30);
+
+        jpnPainelBrancoInterno.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelBrancoInterno.setLayout(null);
+
+        lblOrcamentoDaEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblOrcamentoDaEmpresa.setForeground(new java.awt.Color(0, 0, 0));
+        lblOrcamentoDaEmpresa.setText("Orçamento da Empresa");
+        jpnPainelBrancoInterno.add(lblOrcamentoDaEmpresa);
+        lblOrcamentoDaEmpresa.setBounds(70, 20, 210, 25);
+
+        jtbTabelaDeFinancas.setBackground(new java.awt.Color(255, 255, 255));
+        jtbTabelaDeFinancas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtbTabelaDeFinancas.setForeground(new java.awt.Color(0, 0, 0));
+        jtbTabelaDeFinancas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Eventos", "Salários", "Fornecedores", "Despesas Operacionais"
+            }
+        ));
+        jtbTabelaDeFinancas.setShowGrid(false);
+        jtbTabelaDeFinancas.setShowHorizontalLines(true);
+        jtbTabelaDeFinancas.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(jtbTabelaDeFinancas);
+
+        jpnPainelBrancoInterno.add(jScrollPane1);
+        jScrollPane1.setBounds(70, 120, 850, 430);
+
+        lblSelecioneOAno.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblSelecioneOAno.setForeground(new java.awt.Color(0, 0, 0));
+        lblSelecioneOAno.setText("Selecione o ano:");
+        jpnPainelBrancoInterno.add(lblSelecioneOAno);
+        lblSelecioneOAno.setBounds(480, 70, 120, 30);
+
+        jcbEscolhaDoAno.setBackground(new java.awt.Color(255, 255, 255));
+        jcbEscolhaDoAno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbEscolhaDoAno.setForeground(new java.awt.Color(0, 0, 0));
+        jcbEscolhaDoAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "2023", "2024", "2025", "2026" }));
+        jcbEscolhaDoAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEscolhaDoAnoActionPerformed(evt);
+            }
+        });
+        jpnPainelBrancoInterno.add(jcbEscolhaDoAno);
+        jcbEscolhaDoAno.setBounds(600, 70, 170, 30);
+
+        lblSelecioneOMes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblSelecioneOMes.setForeground(new java.awt.Color(0, 0, 0));
+        lblSelecioneOMes.setText("Selecione o mês:");
+        jpnPainelBrancoInterno.add(lblSelecioneOMes);
+        lblSelecioneOMes.setBounds(70, 70, 120, 30);
+
+        jcbEscolhaDoMes.setBackground(new java.awt.Color(255, 255, 255));
+        jcbEscolhaDoMes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbEscolhaDoMes.setForeground(new java.awt.Color(0, 0, 0));
+        jcbEscolhaDoMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mês", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+        jcbEscolhaDoMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEscolhaDoMesActionPerformed(evt);
+            }
+        });
+        jpnPainelBrancoInterno.add(jcbEscolhaDoMes);
+        jcbEscolhaDoMes.setBounds(200, 70, 170, 30);
+
+        btnVoltar.setBackground(new java.awt.Color(22, 43, 64));
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+        jpnPainelBrancoInterno.add(btnVoltar);
+        btnVoltar.setBounds(790, 570, 130, 40);
+
+        jpnPainelAzulDoTotal.setBackground(new java.awt.Color(22, 43, 64));
+
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotal.setText("Total:");
+
+        javax.swing.GroupLayout jpnPainelAzulDoTotalLayout = new javax.swing.GroupLayout(jpnPainelAzulDoTotal);
+        jpnPainelAzulDoTotal.setLayout(jpnPainelAzulDoTotalLayout);
+        jpnPainelAzulDoTotalLayout.setHorizontalGroup(
+            jpnPainelAzulDoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulDoTotalLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblTotal)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jpnPainelAzulDoTotalLayout.setVerticalGroup(
+            jpnPainelAzulDoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulDoTotalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnPainelBrancoInterno.add(jpnPainelAzulDoTotal);
+        jpnPainelAzulDoTotal.setBounds(70, 570, 86, 40);
+
+        jpnPainelDoValor.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelDoValor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpnPainelDoValor.setForeground(new java.awt.Color(0, 0, 0));
+
+        lblMostraTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostraTotal.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jpnPainelDoValorLayout = new javax.swing.GroupLayout(jpnPainelDoValor);
+        jpnPainelDoValor.setLayout(jpnPainelDoValorLayout);
+        jpnPainelDoValorLayout.setHorizontalGroup(
+            jpnPainelDoValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelDoValorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMostraTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnPainelDoValorLayout.setVerticalGroup(
+            jpnPainelDoValorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelDoValorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMostraTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnPainelBrancoInterno.add(jpnPainelDoValor);
+        jpnPainelDoValor.setBounds(160, 570, 140, 40);
+
+        jpnPainelAzulDoTotal1.setBackground(new java.awt.Color(22, 43, 64));
+
+        lblLucro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblLucro.setForeground(new java.awt.Color(255, 255, 255));
+        lblLucro.setText("Lucro:");
+
+        javax.swing.GroupLayout jpnPainelAzulDoTotal1Layout = new javax.swing.GroupLayout(jpnPainelAzulDoTotal1);
+        jpnPainelAzulDoTotal1.setLayout(jpnPainelAzulDoTotal1Layout);
+        jpnPainelAzulDoTotal1Layout.setHorizontalGroup(
+            jpnPainelAzulDoTotal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulDoTotal1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblLucro)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jpnPainelAzulDoTotal1Layout.setVerticalGroup(
+            jpnPainelAzulDoTotal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulDoTotal1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLucro, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnPainelBrancoInterno.add(jpnPainelAzulDoTotal1);
+        jpnPainelAzulDoTotal1.setBounds(340, 570, 87, 40);
+
+        jpnPainelDoValor1.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelDoValor1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpnPainelDoValor1.setForeground(new java.awt.Color(0, 0, 0));
+
+        lblMostraOLucro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostraOLucro.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jpnPainelDoValor1Layout = new javax.swing.GroupLayout(jpnPainelDoValor1);
+        jpnPainelDoValor1.setLayout(jpnPainelDoValor1Layout);
+        jpnPainelDoValor1Layout.setHorizontalGroup(
+            jpnPainelDoValor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelDoValor1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMostraOLucro, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnPainelDoValor1Layout.setVerticalGroup(
+            jpnPainelDoValor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelDoValor1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMostraOLucro, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnPainelBrancoInterno.add(jpnPainelDoValor1);
+        jpnPainelDoValor1.setBounds(430, 570, 130, 40);
+
+        javax.swing.GroupLayout jpnPainelAzulExternoLayout = new javax.swing.GroupLayout(jpnPainelAzulExterno);
+        jpnPainelAzulExterno.setLayout(jpnPainelAzulExternoLayout);
+        jpnPainelAzulExternoLayout.setHorizontalGroup(
+            jpnPainelAzulExternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnPainelAzulExternoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpnMenuBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
+            .addGroup(jpnPainelAzulExternoLayout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(jpnPainelBrancoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpnPainelAzulExternoLayout.setVerticalGroup(
+            jpnPainelAzulExternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnPainelAzulExternoLayout.createSequentialGroup()
+                .addComponent(jpnMenuBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jpnPainelBrancoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 308, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnPainelAzulExterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnPainelAzulExterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    
+    private void jcbEscolhaDoMesActionPerformed(java.awt.event.ActionEvent evt) {
+        String mesSelecionado = (String) jcbEscolhaDoMes.getSelectedItem();
+        if (!"Mês".equals(mesSelecionado)) {
+            atualizarTabelaEventosPorMes(mesSelecionado);
+        }
+        calcularEAtualizarValorTotal();
+        calcularEAtualizarLucro();
+
+    } 
+     //luba: e tem outra sequência, ALGUÉM ME MATAAAAAAAAAAAAAAAAAAAAAAA
+    private void calcularEAtualizarLucro() {
+        DefaultTableModel model = (DefaultTableModel) jtbTabelaDeFinancas.getModel();
+        int rowCount = model.getRowCount();
+        int totalReceitas = 0;
+        int totalDespesasOperacionais = 0;
+
+        for (int i = 0; i < rowCount; i++) {
+            totalReceitas += Integer.parseInt(model.getValueAt(i, 1).toString()); // Somando as receitas (salários)
+            totalDespesasOperacionais += Integer.parseInt(model.getValueAt(i, 3).toString()); // Somando as despesas operacionais
+        }
+
+        int lucroLiquido = totalReceitas - totalDespesasOperacionais;
+        lblMostraOLucro.setText("R$" + lucroLiquido);
+    }
+
+
+    private void calcularEAtualizarValorTotal() {
+        DefaultTableModel model = (DefaultTableModel) jtbTabelaDeFinancas.getModel();
+        int rowCount = model.getRowCount();
+        int totalSalarios = 0;
+        int totalDespesasOperacionais = 0;
+
+        for (int i = 0; i < rowCount; i++) {
+            totalSalarios += Integer.parseInt(model.getValueAt(i, 1).toString());
+            totalDespesasOperacionais += Integer.parseInt(model.getValueAt(i, 3).toString());
+        }
+
+        int total = totalSalarios + totalDespesasOperacionais;
+        lblMostraTotal.setText("R$" + total);
+    }
+
+    
+    private void atualizarTabelaEventosPorMes(String mesSelecionado) {
+        DefaultTableModel model = (DefaultTableModel) jtbTabelaDeFinancas.getModel();
+        model.setRowCount(0);
+
+        List<String> nomesFornecedores = obterNomesFornecedores();
+
+        Conexao conexao = new Conexao();
+        Connection conn = conexao.conectaBD();
+
+        int salarioFuncionario = 10000;
+        int salarioAdministrador = 15000;
+
+        String query = "SELECT nome AS evento FROM tbEvento WHERE MONTH(dataprevis) = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            int mes = obterNumeroDoMes(mesSelecionado);
+            preparedStatement.setInt(1, mes);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            int nomeFornecedorIndex = 0;
+            
+            while (resultSet.next()) {
+                String nomeEvento = resultSet.getString("evento");
+                String nomeFornecedor = nomeFornecedorIndex < nomesFornecedores.size()
+                    ? nomesFornecedores.get(nomeFornecedorIndex)
+                    : "";
+                model.addRow(new Object[]{nomeEvento, salarioFuncionario, nomeFornecedor, salarioAdministrador});
+
+                nomeFornecedorIndex++; 
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    
+    
+    private List<String> obterNomesFornecedores() {
+        List<String> nomesFornecedores = new ArrayList<>();
+        
+        Conexao conexao = new Conexao();
+        Connection conn = conexao.conectaBD();
+
+        String query = "SELECT nome FROM tbfornecedor";
+        try (Statement statement = conn.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                String nomeFornecedor = resultSet.getString("nome");
+                nomesFornecedores.add(nomeFornecedor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return nomesFornecedores;
+    }
+
+    private void atualizarTabelaEventosPorAno(String anoSelecionado) {
+        DefaultTableModel model = (DefaultTableModel) jtbTabelaDeFinancas.getModel();
+        model.setRowCount(0);
+
+        List<String> nomesFornecedores = obterNomesFornecedores();
+
+        Conexao conexao = new Conexao();
+        Connection conn = conexao.conectaBD();
+
+        int salarioFuncionario = 10000;
+        int salarioAdministrador = 15000;
+
+        String query = "SELECT nome AS evento FROM tbEvento WHERE YEAR(dataprevis) = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            int ano = Integer.parseInt(anoSelecionado);
+            preparedStatement.setInt(1, ano);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            int nomeFornecedorIndex = 0; // Índice para acompanhar os nomes dos fornecedores
+
+            while (resultSet.next()) {
+                String nomeEvento = resultSet.getString("evento");
+                String nomeFornecedor = nomeFornecedorIndex < nomesFornecedores.size()
+                    ? nomesFornecedores.get(nomeFornecedorIndex)
+                    : "";
+                model.addRow(new Object[]{nomeEvento, salarioFuncionario, nomeFornecedor, salarioAdministrador});
+
+                nomeFornecedorIndex++; // Avança para o próximo nome de fornecedor
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private int calcularSalarios(int salarioFuncionario, int salarioAdministrador) {
+        
+        int quantidadeFuncionarios = 10; 
+        int quantidadeAdministradores = 5; 
+        
+        int totalSalarios = (quantidadeFuncionarios * salarioFuncionario) + (quantidadeAdministradores * salarioAdministrador);
+
+        return totalSalarios;
+        
+    }
+
+    private int obterNumeroDoMes(String nomeMes) {
+        switch (nomeMes) {
+            case "Janeiro":
+                return 1;
+            case "Fevereiro":
+                return 2;
+            case "Março":
+                return 3;
+            case "Abril":
+                return 4;
+            case "Maio":
+                return 5;
+            case "Junho":
+                return 6;
+            case "Julho":
+                return 7;
+            case "Agosto":
+                return 8;
+            case "Setembro":
+                return 9;
+            case "Outubro":
+                return 10;
+            case "Novembro":
+                return 11;
+            case "Dezembro":
+                return 12;
+            default:
+                return 0; // Mês inválido
+        }
+    }
+    
+    
+    
+    private void jcbEscolhaDoAnoActionPerformed(java.awt.event.ActionEvent evt) {
+        String anoSelecionado = (String) jcbEscolhaDoAno.getSelectedItem();
+        if (!"Ano".equals(anoSelecionado)) {
+            atualizarTabelaEventosPorAno(anoSelecionado);
+        }
+        
+        calcularEAtualizarValorTotal();
+        calcularEAtualizarLucro();
+
+    }
+    
+    private void btnManualDoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+    }                                                  
+
+    private void btnConfiguracoesESuporteActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+    }                                                        
+                                               
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    }                                         
+
+    public static void main(String args[]) {
+ 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FinancasView().setVisible(true);
+            }
+        });
+    }
+
+    private javax.swing.JButton btnConfiguracoesESuporte;
+    private javax.swing.JButton btnManualDoUsuario;
+    private javax.swing.JButton btnSobreNos;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcbEscolhaDoAno;
+    private javax.swing.JComboBox<String> jcbEscolhaDoMes;
+    private javax.swing.JPanel jpnMenuBranco;
+    private javax.swing.JPanel jpnPainelAzulDoTotal;
+    private javax.swing.JPanel jpnPainelAzulDoTotal1;
+    private javax.swing.JPanel jpnPainelAzulExterno;
+    private javax.swing.JPanel jpnPainelBrancoInterno;
+    private javax.swing.JPanel jpnPainelDoValor;
+    private javax.swing.JPanel jpnPainelDoValor1;
+    private javax.swing.JTable jtbTabelaDeFinancas;
+    private javax.swing.JLabel lblLucro;
+    private javax.swing.JLabel lblMostraOLucro;
+    private javax.swing.JLabel lblMostraTotal;
+    private javax.swing.JLabel lblOrcamentoDaEmpresa;
+    private javax.swing.JLabel lblSelecioneOAno;
+    private javax.swing.JLabel lblSelecioneOMes;
+    private javax.swing.JLabel lblTaskTide;
+    private javax.swing.JLabel lblTotal;
+}

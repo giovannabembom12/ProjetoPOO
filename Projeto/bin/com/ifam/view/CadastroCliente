@@ -1,8 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.view;
+
+import java.sql.Connection;
+import java.util.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +24,7 @@ public class CadastroCliente extends javax.swing.JFrame {
      */
     public CadastroCliente() {
         initComponents();
+        atualizarTabelaClientes();
     }
 
     /**
@@ -58,6 +68,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -75,6 +86,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnSobreNos.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeSobreNos.png")); // NOI18N
         btnSobreNos.setText(" Sobre Nós");
         btnSobreNos.setBorder(null);
+        btnSobreNos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobreNosActionPerformed(evt);
+            }
+        });
 
         btnConfiguracoes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnConfiguracoes.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeEngrenagem.png")); // NOI18N
@@ -137,6 +153,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeVoltar.png")); // NOI18N
         btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnVoltarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(22, 43, 64));
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -167,46 +188,46 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblEndereco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEndereco.setText("Endereço:");
 
-        txtNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
 
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
 
-        txtTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTelefone.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefoneActionPerformed(evt);
             }
         });
 
-        txtCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCPF.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        txtNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNascimento.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNascimentoActionPerformed(evt);
             }
         });
 
-        txtEndereço.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEndereço.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        txtCelular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCelular.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCelularActionPerformed(evt);
             }
         });
 
-        lblCelular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCelular.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblCelular.setText("Celular:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -298,6 +319,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(490, 500));
 
+        tblCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -308,7 +330,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCliente);
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -319,12 +341,22 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnBuscarActionPerformed(evt);
+        }
+    });
 
         btnEditar.setBackground(new java.awt.Color(22, 43, 64));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeEditar.png")); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(22, 43, 64));
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -337,12 +369,35 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        btnSalvar.setBackground(new java.awt.Color(22, 43, 64));
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("file:/C:/Users/PC/Downloads/IconeSalvarAlt.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+        btnSalvar.setText("Salvar Alterações");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,7 +424,8 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
-                    .addComponent(btnEditar))
+                    .addComponent(btnEditar)
+                    .addComponent(btnSalvar))
                 .addGap(35, 35, 35))
         );
 
@@ -408,7 +464,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         );
 
         setBounds(0, 0, 1316, 698);
-    }// </editor-fold>                        
+    }// </editor-fold>                         
 
     private void btnConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
@@ -416,19 +472,72 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }                                         
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    }                                            
+    }                             
+    
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    	Menu menu = new Menu();
+		menu.setVisible(true);
+		this.dispose();
+    } 
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }                                         
+    }   
+    
+    private void btnSobreNosActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    	SobreNos sobrenos = new SobreNos();
+		sobrenos.setVisible(true);
+		this.dispose();
+    }   
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtém o modelo da tabela
+        DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
+
+        // Verifica se uma linha está selecionada
+        int selectedRow = tblCliente.getSelectedRow();
+        if (selectedRow == -1) {
+            // Nenhuma linha selecionada, exibe uma mensagem de erro
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Confirmação antes de excluir
+        int choice = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esta linha?", "Confirmação",
+                JOptionPane.YES_NO_OPTION);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            // Obtém o código do cliente selecionado na tabela
+            int codigoCliente = (int) model.getValueAt(selectedRow, 0); // Supondo que a coluna 0 contenha o código do cliente
+
+            // Exclui o cliente do banco de dados
+            if (excluirCliente(codigoCliente)) {
+                // Remove a linha selecionada do modelo da tabela
+                model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o cliente. Verifique os dados e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private boolean excluirCliente(int codigoCliente) {
+        try {
+            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+            String query = "DELETE FROM tbcliente WHERE codigo=?";
+            
+            try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+                preparedStatement.setInt(1, codigoCliente);
+                preparedStatement.executeUpdate();
+            }
+            
+            conexao.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }                    
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
@@ -448,7 +557,287 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                          
+    }
+    
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String nome = txtNome.getText();
+        String email = txtEmail.getText();
+        String celular = txtCelular.getText();
+        String telefone = txtTelefone.getText();
+        String cpf = txtCPF.getText();
+        String endereco = txtEndereço.getText();
+        String dtnasc = txtNascimento.getText();
+
+        // Formatando a data para o formato correto
+        String dataFormatada = formatarData(dtnasc);
+
+        if (inserirCliente(nome, email, celular, telefone, cpf, endereco, dataFormatada)) {
+            JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+            limparCampos();
+            atualizarTabelaClientes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o cliente. Verifique os dados e tente novamente.");
+        }
+    }
+
+    private boolean inserirCliente(String nome, String email, String celular, String telefone, String cpf, String endereco, String dtnasc) {
+        try {
+            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+            String query = "INSERT INTO tbcliente (nome, email, celular, telefone, cpf, endereco, dtnasc) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            
+            // Use PreparedStatement para evitar SQL Injection
+            try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+                preparedStatement.setString(1, nome);
+                preparedStatement.setString(2, email);
+                preparedStatement.setString(3, celular);
+                preparedStatement.setString(4, telefone);
+                preparedStatement.setString(5, cpf);
+                preparedStatement.setString(6, endereco);
+                
+                // Agora, passamos a data formatada para o PreparedStatement
+                preparedStatement.setString(7, dtnasc);
+                
+                preparedStatement.executeUpdate();
+            }
+            
+            conexao.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private String formatarData(String data) {
+        try {
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = formatoEntrada.parse(data);
+            return formatoSaida.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private void atualizarTabelaClientes() {
+        DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
+        model.setRowCount(0); // Limpa a tabela antes de preenchê-la novamente
+
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+            String query = "SELECT * FROM tbcliente";
+            try (PreparedStatement pst = con.prepareStatement(query)) {
+                ResultSet rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    int codigo = rs.getInt("codigo");
+                    String nome = rs.getString("nome");
+                    String email = rs.getString("email");
+                    String dtnasc = rs.getString("dtnasc");
+                    String cpf = rs.getString("cpf");
+                    String telefone = rs.getString("telefone");
+                    String celular = rs.getString("celular");
+                    String endereco = rs.getString("endereco");
+
+                    model.addRow(new Object[]{codigo, nome, email, dtnasc, cpf, telefone, celular, endereco});
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void limparCampos() {
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtCelular.setText("");
+        txtTelefone.setText("");
+        txtCPF.setText("");
+        txtEndereço.setText("");
+        txtNascimento.setText("");
+    }
+    
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        String termoPesquisa = txtBuscar.getText();
+
+        if (!termoPesquisa.isEmpty()) {
+            atualizarTabelaClientesPesquisa(termoPesquisa);
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite um nome ou CPF para buscar.");
+        }
+    }
+
+    private void atualizarTabelaClientesPesquisa(String termoPesquisa) {
+        DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
+        model.setRowCount(0); // Limpa a tabela antes de preenchê-la novamente
+
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+            String query = "SELECT * FROM tbcliente WHERE nome LIKE ? OR cpf LIKE ?";
+            
+            try (PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setString(1, "%" + termoPesquisa + "%");
+                pst.setString(2, "%" + termoPesquisa + "%");
+
+                ResultSet rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    int codigo = rs.getInt("codigo");
+                    String nome = rs.getString("nome");
+                    String email = rs.getString("email");
+                    String dtnasc = rs.getString("dtnasc");
+                    String cpf = rs.getString("cpf");
+                    String telefone = rs.getString("telefone");
+                    String celular = rs.getString("celular");
+                    String endereco = rs.getString("endereco");
+
+                    model.addRow(new Object[]{codigo, nome, email, dtnasc, cpf, telefone, celular, endereco});
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtém o modelo da tabela
+        DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
+
+        // Verifica se uma linha está selecionada
+        int selectedRow = tblCliente.getSelectedRow();
+        if (selectedRow == -1) {
+            // Nenhuma linha selecionada, exibe uma mensagem de erro
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtém o código do cliente selecionado na tabela
+        int codigoCliente = (int) model.getValueAt(selectedRow, 0); // Supondo que a coluna 0 contenha o código do cliente
+
+        // Preenche os campos de edição com os dados do cliente selecionado na tabela
+        preencherCamposEdicao(codigoCliente);
+
+        // Agora, ao clicar no botão editar, não exibe a confirmação imediatamente
+    }
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtém o modelo da tabela
+        DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
+
+        // Verifica se uma linha está selecionada
+        int selectedRow = tblCliente.getSelectedRow();
+        if (selectedRow == -1) {
+            // Nenhuma linha selecionada, exibe uma mensagem de erro
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para salvar as alterações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtém o código do cliente selecionado na tabela
+        int codigoCliente = (int) model.getValueAt(selectedRow, 0); // Supondo que a coluna 0 contenha o código do cliente
+
+        // Executa a edição no banco de dados
+        if (editarCliente(codigoCliente)) {
+            JOptionPane.showMessageDialog(this, "Alterações salvas com sucesso!");
+            limparCampos();
+            atualizarTabelaClientes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar as alterações. Verifique os dados e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    private void confirmarEdicao(int codigoCliente) {
+        // Executa a edição no banco de dados
+        if (editarCliente(codigoCliente)) {
+            JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!");
+            limparCampos();
+            atualizarTabelaClientes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao editar o cliente. Verifique os dados e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    private void preencherCamposEdicao(int codigoCliente) {
+        try {
+            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+            String query = "SELECT * FROM tbcliente WHERE codigo=?";
+            
+            try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+                preparedStatement.setInt(1, codigoCliente);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                if (rs.next()) {
+                    // Preencher os campos de edição com os dados do cliente
+                    txtNome.setText(rs.getString("nome"));
+                    txtEmail.setText(rs.getString("email"));
+                    txtCelular.setText(rs.getString("celular"));
+                    txtTelefone.setText(rs.getString("telefone"));
+                    txtCPF.setText(rs.getString("cpf"));
+                    txtEndereço.setText(rs.getString("endereco"));
+                    
+                    // Formatando a data para o formato correto
+                    SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = rs.getDate("dtnasc");
+                    String dataFormatada = formatoSaida.format(date);
+                    txtNascimento.setText(dataFormatada);
+                }
+            }
+            
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean editarCliente(int codigoCliente) {
+        try {
+            // Obtenha os dados dos campos de edição conforme necessário
+            String nome = txtNome.getText();
+            String email = txtEmail.getText();
+            String celular = txtCelular.getText();
+            String telefone = txtTelefone.getText();
+            String cpf = txtCPF.getText();
+            String endereco = txtEndereço.getText();
+            String dtnasc = txtNascimento.getText();
+
+            // Formate a data para o formato correto
+            String dataFormatada = formatarData(dtnasc);
+
+            // Exibe um JOptionPane para confirmar as alterações
+            int option = JOptionPane.showConfirmDialog(this, "Deseja salvar as alterações?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                // Executa a edição no banco de dados
+                Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tasktide", "root", "root");
+                String query = "UPDATE tbcliente SET nome=?, email=?, celular=?, telefone=?, cpf=?, endereco=?, dtnasc=? WHERE codigo=?";
+
+                try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+                    preparedStatement.setString(1, nome);
+                    preparedStatement.setString(2, email);
+                    preparedStatement.setString(3, celular);
+                    preparedStatement.setString(4, telefone);
+                    preparedStatement.setString(5, cpf);
+                    preparedStatement.setString(6, endereco);
+                    preparedStatement.setString(7, dataFormatada);
+
+                    preparedStatement.setInt(8, codigoCliente);
+
+                    preparedStatement.executeUpdate();
+                }
+
+                conexao.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }                                                                            
 
     /**
      * @param args the command line arguments
@@ -492,6 +881,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnManual;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSobreNos;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;

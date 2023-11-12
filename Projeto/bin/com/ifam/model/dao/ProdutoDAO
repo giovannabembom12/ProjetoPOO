@@ -1,35 +1,157 @@
 package com.model.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import com.model.vo.AluguelServicosVO;
-import com.model.vo.ProdutoVO;
-import com.model.dao.Conexao;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
-import com.view.CadastroProdutoServico;
+import javax.swing.table.DefaultTableModel;
 
 public class ProdutoDAO {
-	private Connection conexao;
+
+	private String url = "jdbc:mysql://localhost/tasktide";
+	private String usuario = "root";
+	private String senha = "root";
 
 	public ProdutoDAO() {
-		this.conexao = conexao;
 	}
 
-	// Inserir um novo serviço no banco de dados
-	public void inserirProduto(ProdutoVO produto) throws SQLException {
-		String sql = "INSERT INTO tbProduto (codigo, nome, fornecedor, categoria, valorUnit) VALUES (?, ?, ?, ?, ?)";
+	public void popularComboBoxFornecedores(javax.swing.JComboBox<String> cbFornecedor) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "SELECT nome FROM tbfornecedor";
+			Statement statement = conexao.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
 
-		try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-			ps.setInt(1, produto.getCodigo());
-			ps.setString(2, produto.getNome());
-			ps.setString(3, produto.getFornecedor());
-			ps.setString(4, produto.getCategoria());
-			ps.setDouble(5, produto.getValorUnit());
-			ps.executeUpdate();
+			cbFornecedor.removeAllItems();
+
+			while (resultSet.next()) {
+				String nomeFornecedor = resultSet.getString("nome");
+				cbFornecedor.addItem(nomeFornecedor);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados.");
+		}
+	}
+
+	public void popularComboBoxCategoria(javax.swing.JComboBox<String> cbCategoria) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "SELECT DISTINCT especializacao FROM tbFornecedor";
+			Statement statement = conexao.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			cbCategoria.removeAllItems();
+
+			while (resultSet.next()) {
+				String nomeFornecedor = resultSet.getString("especializacao");
+				cbCategoria.addItem(nomeFornecedor);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados.");
+		}
+	}
+
+	public void popularTabelaProdutos(javax.swing.JTable tblProdutos) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "SELECT codigo, nome, fornecedor, categoria, valorUnit FROM tbproduto ORDER BY codigo";
+			Statement statement = conexao.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			DefaultTableModel tableModel = (DefaultTableModel) tblProdutos.getModel();
+			tableModel.setRowCount(0);
+
+			while (resultSet.next()) {
+				int codigo = resultSet.getInt("codigo");
+				String nome = resultSet.getString("nome");
+				String fornecedor = resultSet.getString("fornecedor");
+				String categoria = resultSet.getString("categoria");
+				double valorUnit = resultSet.getDouble("valorUnit");
+
+				tableModel.addRow(new Object[] { codigo, nome, fornecedor, categoria, valorUnit });
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados.");
+		}
+	}
+
+	public boolean cadastrarProduto(String nome, String fornecedor, String categoria, String valorUnit,
+			String observacoes) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "INSERT INTO tbproduto (nome, fornecedor, categoria, valorUnit, descricao) VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement pstmt = conexao.prepareStatement(sql);
+			pstmt.setString(1, nome);
+			pstmt.setString(2, fornecedor);
+			pstmt.setString(3, categoria);
+			pstmt.setString(4, valorUnit);
+			pstmt.setString(5, observacoes);
+
+			pstmt.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Sucesso",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
+
+	public boolean excluirProduto(int codigo) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "DELETE FROM tbproduto WHERE codigo = ?";
+			PreparedStatement pstmt = conexao.prepareStatement(sql);
+			pstmt.setInt(1, codigo);
+			int linhasAfetadas = pstmt.executeUpdate();
+
+			if (linhasAfetadas > 0) {
+				JOptionPane.showMessageDialog(null, "Item excluído com sucesso!", "Sucesso",
+						JOptionPane.INFORMATION_MESSAGE);
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Nenhum dado foi excluído.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao excluir o item.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
+
+	public boolean editarProduto(int codigo, String nome, String fornecedor, String categoria, double valorUnit) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String sql = "UPDATE tbproduto SET nome=?, fornecedor=?, categoria=?, valorUnit=? WHERE codigo=?";
+			try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+				pstmt.setString(1, nome);
+				pstmt.setString(2, fornecedor);
+				pstmt.setString(3, categoria);
+				pstmt.setDouble(4, valorUnit);
+				pstmt.setInt(5, codigo);
+
+				int linhasAfetadas = pstmt.executeUpdate();
+
+				if (linhasAfetadas > 0) {
+					JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Sucesso",
+							JOptionPane.INFORMATION_MESSAGE);
+					return true;
+				} else {
+					JOptionPane.showMessageDialog(null, "Nenhum dado foi atualizado.", "Aviso",
+							JOptionPane.WARNING_MESSAGE);
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao salvar as alterações: " + e.getMessage(), "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 	}
 }

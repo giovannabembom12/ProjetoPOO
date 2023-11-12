@@ -1,16 +1,18 @@
 package com.model.vo;
 
-public class AluguelServicosVO {
+public class AluguelVO {
 	 public int codigo;
 	 public String nome;
 	 public int quantidade;
-	 public float valorUnit;
+	 public double valorUnit;
+	 public double total;
 	
-	public void AluguelServicos(int codigo, String nome, int quantidade, float valorUnit) {
+	public void AluguelServicos(int codigo, String nome, int quantidade, double valorUnit, double total) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.quantidade = quantidade;
 		this.valorUnit = valorUnit;
+		this.total = total;
 	}
 
 	public int getCodigo() {
@@ -37,12 +39,20 @@ public class AluguelServicosVO {
 		this.quantidade = quantidade;
 	}
 
-	public float getValorUnit() {
+	public double getValorUnit() {
 		return valorUnit;
 	}
 
-	public void setValorUnit(float valorUnit) {
+	public void setValorUnit(double valorUnit) {
 		this.valorUnit = valorUnit;
+	}
+	
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 }

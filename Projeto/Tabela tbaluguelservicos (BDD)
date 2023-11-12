@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS tbaluguelservicos;
-CREATE TABLE tbaluguelservicos(
-codigo INT AUTO_INCREMENT PRIMARY KEY,
-nome VARCHAR(200) NOT NULL,
-quantidade INT NOT NULL,
-valorUnit DECIMAL(7,2) NOT NULL
-);

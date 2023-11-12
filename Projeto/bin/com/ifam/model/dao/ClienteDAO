@@ -1,0 +1,100 @@
+package com.model.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.view.CadastroCliente;
+
+public class ClienteDAO {
+
+	private String url = "jdbc:mysql://localhost:3306/tasktide";
+	private String usuario = "root";
+	private String senha = "root";
+
+	public ClienteDAO() {
+	}
+
+	public boolean inserirCliente(String nome, String email, String celular, String telefone, String cpf,
+			String endereco, String dtnasc) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "INSERT INTO tbcliente (nome, email, celular, telefone, cpf, endereco, dtnasc) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+			try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+				preparedStatement.setString(1, nome);
+				preparedStatement.setString(2, email);
+				preparedStatement.setString(3, celular);
+				preparedStatement.setString(4, telefone);
+				preparedStatement.setString(5, cpf);
+				preparedStatement.setString(6, endereco);
+				preparedStatement.setString(7, dtnasc);
+
+				preparedStatement.executeUpdate();
+			}
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean editarCliente(int codigoCliente, String nome, String email, String celular, String telefone,
+			String cpf, String endereco, String dtnasc) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "UPDATE tbcliente SET nome=?, email=?, celular=?, telefone=?, cpf=?, endereco=?, dtnasc=? WHERE codigo=?";
+
+			try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+				preparedStatement.setString(1, nome);
+				preparedStatement.setString(2, email);
+				preparedStatement.setString(3, celular);
+				preparedStatement.setString(4, telefone);
+				preparedStatement.setString(5, cpf);
+				preparedStatement.setString(6, endereco);
+				preparedStatement.setString(7, dtnasc);
+
+				preparedStatement.setInt(8, codigoCliente);
+
+				preparedStatement.executeUpdate();
+			}
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean excluirCliente(int codigoCliente) {
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "DELETE FROM tbcliente WHERE codigo=?";
+
+			try (PreparedStatement preparedStatement = conexao.prepareStatement(query)) {
+				preparedStatement.setInt(1, codigoCliente);
+				preparedStatement.executeUpdate();
+			}
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public String formatarData(String data) {
+		try {
+			SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = formatoEntrada.parse(data);
+			return formatoSaida.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+}

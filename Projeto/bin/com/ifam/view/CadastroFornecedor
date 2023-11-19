@@ -1,0 +1,719 @@
+package com.view;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+public class CadastroFornecedor extends javax.swing.JFrame {
+
+	public CadastroFornecedor() {
+		initComponents();
+		atualizarTabelaFornecedores();
+		configurarComboBox();
+	}
+
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">
+	private void initComponents() {
+
+		jPanel1 = new javax.swing.JPanel();
+		jPanel2 = new javax.swing.JPanel();
+		lblLogo = new javax.swing.JLabel();
+		btnSobreNos = new javax.swing.JButton();
+		btnConfiguracoesESuporte = new javax.swing.JButton();
+		btnManualUsuario = new javax.swing.JButton();
+		jPanel3 = new javax.swing.JPanel();
+		lblCadastroFornecedor = new javax.swing.JLabel();
+		lblDescricao = new javax.swing.JLabel();
+		btnVoltar = new javax.swing.JButton();
+		btnSalvar = new javax.swing.JButton();
+		lblNome = new javax.swing.JLabel();
+		lblEspecificacao = new javax.swing.JLabel();
+		lblObservacoes = new javax.swing.JLabel();
+		lblTelefone = new javax.swing.JLabel();
+		lblEmail = new javax.swing.JLabel();
+		txtNome = new javax.swing.JTextField();
+		txtEmail = new javax.swing.JTextField();
+		txtTelefone = new javax.swing.JTextField();
+		txtObservacoes = new javax.swing.JTextField();
+		cbEspecificacao = new javax.swing.JComboBox<>();
+		jPanel4 = new javax.swing.JPanel();
+		txtBusca = new javax.swing.JTextField();
+		btnBuscar = new javax.swing.JButton();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		tblFornecedor = new javax.swing.JTable();
+		btnSalvarAlt = new javax.swing.JButton();
+		btnEditar = new javax.swing.JButton();
+		btnExcluir = new javax.swing.JButton();
+
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setExtendedState(6);
+		setMaximumSize(new java.awt.Dimension(1024, 768));
+		setMinimumSize(new java.awt.Dimension(800, 600));
+		setPreferredSize(new java.awt.Dimension(800, 600));
+
+		jPanel1.setBackground(new java.awt.Color(22, 43, 64));
+
+		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+		lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\LogoComFonte.png")); // NOI18N
+
+		btnSobreNos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSobreNos.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeSobreNos.png")); // NOI18N
+		btnSobreNos.setText(" Sobre Nós");
+		btnSobreNos.setBorder(null);
+		btnSobreNos.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSobreNosActionPerformed(evt);
+			}
+		});
+
+		btnConfiguracoesESuporte.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnConfiguracoesESuporte.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeEngrenagem.png")); // NOI18N
+		btnConfiguracoesESuporte.setText(" Configuração e Suporte");
+		btnConfiguracoesESuporte.setBorder(null);
+
+		btnManualUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnManualUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeManualUsuario.png")); // NOI18N
+		btnManualUsuario.setText(" Manual do Usuário");
+		btnManualUsuario.setBorder(null);
+
+		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+		jPanel2.setLayout(jPanel2Layout);
+		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(30, 30, 30).addComponent(lblLogo)
+						.addGap(307, 307, 307).addComponent(btnSobreNos).addGap(120, 120, 120)
+						.addComponent(btnConfiguracoesESuporte).addGap(120, 120, 120).addComponent(btnManualUsuario)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+						Short.MAX_VALUE)
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(39, 39, 39)
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnSobreNos).addComponent(btnConfiguracoesESuporte)
+								.addComponent(btnManualUsuario))
+						.addContainerGap(34, Short.MAX_VALUE)));
+
+		jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+		lblCadastroFornecedor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+		lblCadastroFornecedor.setText("Cadastro de Fornecedores");
+
+		lblDescricao.setForeground(new java.awt.Color(102, 102, 102));
+		lblDescricao.setText("Os campos abaixo serão utilizados para cadastrar fornecedores no sistema.");
+
+		btnVoltar.setBackground(new java.awt.Color(22, 43, 64));
+		btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+		btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeVoltar.png")); // NOI18N
+		btnVoltar.setText(" Voltar");
+		btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnVoltarActionPerformed(evt);
+			}
+		});
+
+		btnSalvar.setBackground(new java.awt.Color(22, 43, 64));
+		btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+		btnSalvar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeSalvar.png")); // NOI18N
+		btnSalvar.setText(" Salvar");
+		btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSalvarActionPerformed(evt);
+			}
+		});
+
+		lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblNome.setText("Nome:");
+
+		lblEspecificacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblEspecificacao.setText("Especificação:");
+
+		lblObservacoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblObservacoes.setText("Observações:");
+
+		lblTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblTelefone.setText("Número de Telefone:");
+
+		lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblEmail.setText("E-mail:");
+
+		txtNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtObservacoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		cbEspecificacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+		jPanel3.setLayout(jPanel3Layout);
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+						.addGroup(jPanel3Layout.createSequentialGroup().addComponent(btnVoltar).addGap(18, 18, 18)
+								.addComponent(btnSalvar))
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(44, 44, 44)
+										.addComponent(lblDescricao))
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(97, 97, 97)
+										.addComponent(lblCadastroFornecedor))
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(83, 83, 83)
+										.addGroup(jPanel3Layout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(jPanel3Layout.createSequentialGroup().addComponent(lblNome)
+														.addGap(18, 18, 18).addComponent(txtNome,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 257,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGroup(jPanel3Layout.createSequentialGroup().addComponent(lblEmail)
+														.addGap(18, 18, 18).addComponent(txtEmail,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 256,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+														.addComponent(lblObservacoes).addComponent(lblEspecificacao,
+																javax.swing.GroupLayout.Alignment.LEADING))
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addGroup(jPanel3Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.TRAILING)
+																.addComponent(cbEspecificacao,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 228,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(txtObservacoes,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 228,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+												.addGroup(jPanel3Layout.createSequentialGroup()
+														.addComponent(lblTelefone).addGap(18, 18, 18).addComponent(
+																txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE,
+																170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+						.addContainerGap(53, Short.MAX_VALUE)));
+		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGap(63, 63, 63).addComponent(lblCadastroFornecedor)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lblDescricao)
+						.addGap(69, 69, 69)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblNome).addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblEspecificacao)
+								.addComponent(cbEspecificacao, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(16, 16, 16)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblEmail).addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblTelefone)
+								.addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblObservacoes).addComponent(txtObservacoes,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(34, 34, 34)));
+
+		jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+		btnBuscar.setBackground(new java.awt.Color(22, 43, 64));
+		btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+		btnBuscar.setText("Buscar");
+		btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnBuscarActionPerformed(evt);
+			}
+		});
+
+		tblFornecedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		tblFornecedor.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+		}, new String[] { "Código", "Nome", "Especificação", "E-mail", "Telefone", "Observações" }) {
+			boolean[] canEdit = new boolean[] { false, false, false, false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane1.setViewportView(tblFornecedor);
+		if (tblFornecedor.getColumnModel().getColumnCount() > 0) {
+			tblFornecedor.getColumnModel().getColumn(0).setResizable(false);
+			tblFornecedor.getColumnModel().getColumn(1).setResizable(false);
+			tblFornecedor.getColumnModel().getColumn(2).setResizable(false);
+			tblFornecedor.getColumnModel().getColumn(3).setResizable(false);
+			tblFornecedor.getColumnModel().getColumn(4).setResizable(false);
+			tblFornecedor.getColumnModel().getColumn(5).setResizable(false);
+		}
+
+		btnSalvarAlt.setBackground(new java.awt.Color(22, 43, 64));
+		btnSalvarAlt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSalvarAlt.setForeground(new java.awt.Color(255, 255, 255));
+		btnSalvarAlt.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeSalvarAlt.png")); // NOI18N
+		btnSalvarAlt.setText(" Salvar Alterações");
+		btnSalvarAlt.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSalvarAltActionPerformed(evt);
+			}
+		});
+
+		btnEditar.setBackground(new java.awt.Color(22, 43, 64));
+		btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+		btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeEditar.png")); // NOI18N
+		btnEditar.setText(" Editar");
+		btnEditar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnEditarActionPerformed(evt);
+			}
+		});
+
+		btnExcluir.setBackground(new java.awt.Color(22, 43, 64));
+		btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+		btnExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeExcluir.png")); // NOI18N
+		btnExcluir.setText(" Excluir");
+		btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnExcluirActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+		jPanel4.setLayout(jPanel4Layout);
+		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup().addGap(112, 112, 112)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel4Layout.createSequentialGroup().addGap(45, 45, 45)
+										.addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(18, 18, 18).addComponent(btnBuscar)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(jPanel4Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
+										.addComponent(btnSalvarAlt).addGap(18, 18, 18).addComponent(btnEditar)
+										.addGap(18, 18, 18).addComponent(btnExcluir).addGap(57, 57, 57))))
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+						.addContainerGap(41, Short.MAX_VALUE).addComponent(jScrollPane1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(49, 49, 49)));
+		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup().addGap(47, 47, 47)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(26, 26, 26)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnSalvarAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(34, 34, 34)));
+
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+						Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(64, 64, 64)
+						.addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(69, 69, 69)
+						.addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(38, 38, 38)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGap(0, 0, Short.MAX_VALUE)));
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+	}// </editor-fold>
+
+	private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+		Menu menu = new Menu();
+		menu.setVisible(true);
+		this.dispose();
+	}
+
+	private void btnSobreNosActionPerformed(java.awt.event.ActionEvent evt) {
+		SobreNos sobrenos = new SobreNos();
+		sobrenos.setVisible(true);
+		this.dispose();
+	}
+
+	private void configurarComboBox() {
+		String[] opcoes = { "Decoração", "Móveis", "Vestuário", "Alimentação", "Estruturas", "Eletrônicos" };
+		DefaultComboBoxModel<String> modeloComboBox = new DefaultComboBoxModel<>(opcoes);
+		cbEspecificacao.setModel(modeloComboBox);
+	}
+
+	private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
+		// Chamado quando o botão "Salvar" é clicado
+
+		// Recupera os valores dos campos
+		String nome = txtNome.getText();
+		String especificacao = (String) cbEspecificacao.getSelectedItem();
+		String email = txtEmail.getText();
+		String telefone = txtTelefone.getText();
+		String observacoes = txtObservacoes.getText();
+
+		// Insere os dados no banco de dados
+		if (inserirFornecedor(nome, especificacao, email, telefone, observacoes)) {
+			// Se a inserção for bem-sucedida, atualiza a tabela
+			atualizarTabelaFornecedores();
+		}
+	}
+
+	// Método para inserir um novo fornecedor no banco de dados
+	private boolean inserirFornecedor(String nome, String especificacao, String email, String telefone,
+			String observacoes) {
+		String url = "jdbc:mysql://localhost:3306/tasktide";
+		String usuario = "root";
+		String senha = "root";
+
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "INSERT INTO tbfornecedor (nome, especificacao, email, telefone, observacoes) VALUES (?, ?, ?, ?, ?)";
+			try (PreparedStatement pst = conexao.prepareStatement(query)) {
+				pst.setString(1, nome);
+				pst.setString(2, especificacao);
+				pst.setString(3, email);
+				pst.setString(4, telefone);
+				pst.setString(5, observacoes);
+
+				int rowsAffected = pst.executeUpdate();
+				return rowsAffected > 0; // Retorna true se pelo menos uma linha foi afetada
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// Método para atualizar a tabela de fornecedores
+	private void atualizarTabelaFornecedores() {
+		DefaultTableModel model = (DefaultTableModel) tblFornecedor.getModel();
+		model.setRowCount(0); // Limpa a tabela
+
+		// Consulta os dados no banco de dados e preenche a tabela
+		String url = "jdbc:mysql://localhost:3306/tasktide";
+		String usuario = "root";
+		String senha = "root";
+
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "SELECT codigo, nome, especificacao, email, telefone, observacoes FROM tbfornecedor";
+			try (PreparedStatement pst = conexao.prepareStatement(query)) {
+				try (ResultSet rs = pst.executeQuery()) {
+					while (rs.next()) {
+						String codigo = rs.getString("codigo");
+						String nome = rs.getString("nome");
+						String especificacao = rs.getString("especificacao");
+						String email = rs.getString("email");
+						String telefone = rs.getString("telefone");
+						String observacoes = rs.getString("observacoes");
+
+						String[] rowData = { codigo, nome, especificacao, email, telefone, observacoes };
+						model.addRow(rowData);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void buscarFornecedorPorNome(String nome) {
+		DefaultTableModel model = (DefaultTableModel) tblFornecedor.getModel();
+		model.setRowCount(0); // Limpa a tabela
+
+		// Consulta os dados no banco de dados e preenche a tabela com base no nome
+		String url = "jdbc:mysql://localhost:3306/tasktide";
+		String usuario = "root";
+		String senha = "root";
+
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "SELECT codigo, nome, especificacao, email, telefone, observacoes FROM tbfornecedor WHERE nome LIKE ?";
+			try (PreparedStatement pst = conexao.prepareStatement(query)) {
+				pst.setString(1, "%" + nome + "%"); // Usa % para buscar por parte do nome
+				try (ResultSet rs = pst.executeQuery()) {
+					while (rs.next()) {
+						String codigo = rs.getString("codigo");
+						String nomeFornecedor = rs.getString("nome");
+						String especificacao = rs.getString("especificacao");
+						String email = rs.getString("email");
+						String telefone = rs.getString("telefone");
+						String observacoes = rs.getString("observacoes");
+
+						String[] rowData = { codigo, nomeFornecedor, especificacao, email, telefone, observacoes };
+						model.addRow(rowData);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+		String nome = txtBusca.getText().trim();
+
+		// Verifica se o campo de busca está preenchido
+		if (!nome.isEmpty()) {
+			buscarFornecedorPorNome(nome);
+		} else {
+			// Se o campo estiver vazio, apenas atualiza a tabela com todos os fornecedores
+			atualizarTabelaFornecedores();
+		}
+	}
+
+	private void excluirFornecedor() {
+		int selectedRow = tblFornecedor.getSelectedRow();
+
+		if (selectedRow == -1) {
+			JOptionPane.showMessageDialog(this, "Por favor, selecione um fornecedor para excluir.", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este fornecedor?",
+				"Confirmação", JOptionPane.YES_NO_OPTION);
+		if (confirmacao != JOptionPane.YES_OPTION) {
+			return; // Se o usuário não confirmar, não faz nada
+		}
+
+		DefaultTableModel model = (DefaultTableModel) tblFornecedor.getModel();
+		String codigo = (String) model.getValueAt(selectedRow, 0); // Obtém o código do fornecedor
+
+		// Exclui o fornecedor do banco de dados
+		String url = "jdbc:mysql://localhost:3306/tasktide";
+		String usuario = "root";
+		String senha = "root";
+
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "DELETE FROM tbfornecedor WHERE codigo = ?";
+			try (PreparedStatement pst = conexao.prepareStatement(query)) {
+				pst.setString(1, codigo);
+				pst.executeUpdate();
+			}
+
+			// Atualiza a tabela após a exclusão
+			atualizarTabelaFornecedores();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Erro ao excluir fornecedor.", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+		excluirFornecedor();
+	}
+	
+	private void editarFornecedor() {
+	    int selectedRow = tblFornecedor.getSelectedRow();
+
+	    if (selectedRow == -1) {
+	        JOptionPane.showMessageDialog(this, "Por favor, selecione um fornecedor para editar.", "Aviso",
+	                JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+
+	    DefaultTableModel model = (DefaultTableModel) tblFornecedor.getModel();
+	    String nome = (String) model.getValueAt(selectedRow, 1);
+	    String especificacao = (String) model.getValueAt(selectedRow, 2);
+	    String email = (String) model.getValueAt(selectedRow, 3);
+	    String telefone = (String) model.getValueAt(selectedRow, 4);
+	    String observacoes = (String) model.getValueAt(selectedRow, 5);
+
+	    // Preenche os campos de edição com os dados do fornecedor selecionado
+	    txtNome.setText(nome);
+	    cbEspecificacao.setSelectedItem(especificacao);
+	    txtEmail.setText(email);
+	    txtTelefone.setText(telefone);
+	    txtObservacoes.setText(observacoes);
+
+	    // Habilita a edição nos campos de texto
+	    txtNome.setEditable(true);
+	    cbEspecificacao.setEnabled(true); // Desabilita a edição na combobox
+	    txtEmail.setEditable(true);
+	    txtTelefone.setEditable(true);
+	    txtObservacoes.setEditable(true);
+	}
+
+	private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+	    editarFornecedor();
+	}
+
+	private void btnSalvarAltActionPerformed(java.awt.event.ActionEvent evt) {
+	    int selectedRow = tblFornecedor.getSelectedRow();
+
+	    if (selectedRow == -1) {
+	        JOptionPane.showMessageDialog(this, "Por favor, selecione um fornecedor para editar.", "Aviso",
+	                JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+
+	    int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja salvar as alterações?",
+	            "Confirmação", JOptionPane.YES_NO_OPTION);
+	    if (confirmacao != JOptionPane.YES_OPTION) {
+	        // Se o usuário não confirmar, desabilita a edição e limpa os campos
+	        limparCampos();
+	        return;
+	    }
+
+	    DefaultTableModel model = (DefaultTableModel) tblFornecedor.getModel();
+	    String nome = (String) model.getValueAt(selectedRow, 0); // Obtém o nome do fornecedor
+
+	    // Atualiza o fornecedor no banco de dados
+	    String url = "jdbc:mysql://localhost:3306/tasktide";
+	    String usuario = "root";
+	    String senha = "root";
+
+	    try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+	        String query = "UPDATE tbfornecedor SET nome = ?, email = ?, telefone = ?, observacoes = ? WHERE codigo = ?";
+	        try (PreparedStatement pst = conexao.prepareStatement(query)) {
+	            pst.setString(1, txtNome.getText());
+	            pst.setString(2, txtEmail.getText());
+	            pst.setString(3, txtTelefone.getText());
+	            pst.setString(4, txtObservacoes.getText());
+	            pst.setString(5, nome);
+	            pst.executeUpdate();
+	        }
+
+	        atualizarTabelaFornecedores();
+	        
+	        // Desabilita a edição nos campos de texto e limpa os campos
+	        limparCampos();
+
+	        // Atualiza a tabela após a edição
+	        atualizarTabelaFornecedores();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(this, "Erro ao editar fornecedor.", "Erro", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+
+
+	private void limparCampos() {
+		txtNome.setText("");
+		cbEspecificacao.setSelectedIndex(0);
+		txtEmail.setText("");
+		txtTelefone.setText("");
+		txtObservacoes.setText("");
+	}
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		/* Set the Nimbus look and feel */
+		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+		// (optional) ">
+		/*
+		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+		 * look and feel. For details see
+		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+		 */
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(CadastroFornecedor.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(CadastroFornecedor.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(CadastroFornecedor.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(CadastroFornecedor.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
+		}
+		// </editor-fold>
+		// </editor-fold>
+		// </editor-fold>
+		// </editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new CadastroFornecedor().setVisible(true);
+			}
+		});
+	}
+
+	// Variables declaration - do not modify
+	private javax.swing.JButton btnBuscar;
+	private javax.swing.JButton btnConfiguracoesESuporte;
+	private javax.swing.JButton btnEditar;
+	private javax.swing.JButton btnExcluir;
+	private javax.swing.JButton btnManualUsuario;
+	private javax.swing.JButton btnSalvar;
+	private javax.swing.JButton btnSalvarAlt;
+	private javax.swing.JButton btnSobreNos;
+	private javax.swing.JButton btnVoltar;
+	private javax.swing.JComboBox<String> cbEspecificacao;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JPanel jPanel2;
+	private javax.swing.JPanel jPanel3;
+	private javax.swing.JPanel jPanel4;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JLabel lblCadastroFornecedor;
+	private javax.swing.JLabel lblDescricao;
+	private javax.swing.JLabel lblEmail;
+	private javax.swing.JLabel lblEspecificacao;
+	private javax.swing.JLabel lblLogo;
+	private javax.swing.JLabel lblNome;
+	private javax.swing.JLabel lblObservacoes;
+	private javax.swing.JLabel lblTelefone;
+	private javax.swing.JTable tblFornecedor;
+	private javax.swing.JTextField txtBusca;
+	private javax.swing.JTextField txtEmail;
+	private javax.swing.JTextField txtNome;
+	private javax.swing.JTextField txtObservacoes;
+	private javax.swing.JTextField txtTelefone;
+	// End of variables declaration
+}

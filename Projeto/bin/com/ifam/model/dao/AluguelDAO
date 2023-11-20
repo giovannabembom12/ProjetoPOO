@@ -5,148 +5,282 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import com.model.vo.AluguelVO;
-import com.model.dao.Conexao;
 import javax.swing.JOptionPane;
-import com.view.Aluguel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class AluguelDAO {
-	private Connection conexao;
 
-	public AluguelDAO() {
-		this.conexao = conexao;
-	}
+    public static void btnAddItemActionPerformed(java.awt.event.ActionEvent evt, double total, JTable tblServico,
+            javax.swing.JTextField txtCodigoServico, javax.swing.JTextField txtNomeServico,
+            javax.swing.JTextField txtQuantidade, javax.swing.JTextField txtValorUnit, javax.swing.JTextField txtTotal) {
+        int quantidade = Integer.parseInt(txtQuantidade.getText());
+        double valorUtilitario = Double.parseDouble(txtValorUnit.getText());
+        double subTotal = quantidade * valorUtilitario;
+        total += subTotal;
+        txtTotal.setText(String.valueOf(total));
 
-	public void inserirServico(AluguelVO servico) throws SQLException {
-		String sql = "INSERT INTO tbaluguelservicos (codigo, nome, quantidade, valorUnit) VALUES (?, ?, ?, ?)";
+        DefaultTableModel carrinho = (DefaultTableModel) tblServico.getModel();
 
-		try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-			ps.setInt(1, servico.getCodigo());
-			ps.setString(2, servico.getNome());
-			ps.setInt(3, servico.getQuantidade());
-			ps.setDouble(4, servico.getValorUnit());
-			ps.executeUpdate();
-		}
-	}
+        carrinho.addRow(new Object[] { txtCodigoServico.getText(), txtNomeServico.getText(),
+                txtQuantidade.getText(), txtValorUnit.getText(), subTotal });
 
-	public void atualizarServico(AluguelVO servico) throws SQLException {
-		String sql = "UPDATE servicos SET nome = ?, quantidade = ?, valorUnit = ? WHERE codigo = ?";
+        limparCamposServico(txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit);
+    }
 
-		try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-			ps.setString(1, servico.getNome());
-			ps.setInt(2, servico.getQuantidade());
-			ps.setDouble(3, servico.getValorUnit());
-			ps.setInt(4, servico.getCodigo());
-			ps.executeUpdate();
-		}
-	}
+    public static void btnBuscarServicoActionPerformed(java.awt.event.ActionEvent evt,
+            javax.swing.JTextField txtCodigoServico, javax.swing.JTextField txtNomeServico,
+            javax.swing.JTextField txtValorUnit, JTable tblServico) {
+        String codigoServico = txtCodigoServico.getText();
 
-	public Aluguel consultarServicoPorCodigo(int codigo) throws SQLException {
-		String sql = "SELECT codigo, nome, quantidade, valorUnit FROM servicos WHERE codigo = ?";
+        if (!codigoServico.isEmpty()) {
+            Servico servico = buscarServicoNoBanco(codigoServico);
 
-		try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-			ps.setInt(1, codigo);
-			try (ResultSet rs = ps.executeQuery()) {
-				if (rs.next()) {
-					String nome = rs.getString("nome");
-					float valorUnitario = rs.getFloat("valorUnit");
-					int quantidade = rs.getInt("quantidade");
-					return new Aluguel();
-				}
-			}
-		}
+            if (servico != null) {
+                txtNomeServico.setText(servico.getNomeServico());
+                txtValorUnit.setText(Double.toString(servico.getValorUnit()));
+            } else {
+                JOptionPane.showMessageDialog(null, "Serviço não encontrado no banco de dados", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo Código do Serviço está vazio", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-		return null;
-	}
+    public static void btnEditarActionPerformed(java.awt.event.ActionEvent evt, JTable tblServico,
+            javax.swing.JTextField txtCodigoServico, javax.swing.JTextField txtNomeServico,
+            javax.swing.JTextField txtQuantidade, javax.swing.JTextField txtValorUnit, double total,
+            javax.swing.JTextField txtTotal) {
+        editarItem(tblServico, txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit);
+        atualizarTotal(tblServico, txtTotal);
+    }
 
-	public List<Aluguel> consultarTodosServicos() throws SQLException {
-		List<Aluguel> servicos = new ArrayList<>();
-		String sql = "SELECT codigo, nome, quantidade, valor_unitario FROM tbaluguelservicos";
+    public static void btnSalvarAltActionPerformed(java.awt.event.ActionEvent evt, JTable tblServico,
+            javax.swing.JTextField txtCodigoServico, javax.swing.JTextField txtNomeServico,
+            javax.swing.JTextField txtQuantidade, javax.swing.JTextField txtValorUnit, double total,
+            javax.swing.JTextField txtTotal) {
+        salvarAlteracoes(tblServico, txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit, total,
+                txtTotal);
+    }
 
-		try (PreparedStatement ps = conexao.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-			while (rs.next()) {
-				int codigo = rs.getInt("codigo");
-				String nome = rs.getString("nome");
-				int quantidade = rs.getInt("quantidade");
-				float valorUnitario = rs.getFloat("valorUnit");
-				servicos.add(new Aluguel());
-			}
-		}
+    public static void btnExcluirActionPerformed(java.awt.event.ActionEvent evt, JTable tblServico, double total,
+            javax.swing.JTextField txtTotal) {
+        excluirItem(tblServico, total, txtTotal);
+    }
 
-		return servicos;
-	}
+    public static void btnSalvarActionPerformed(java.awt.event.ActionEvent evt, javax.swing.JTextField txtCodigoEvento,
+            JTable tblServico) {
+        int idevento = 0;
 
-	public List<Aluguel> listaAluguelServicos(int venda_id) {
+        try {
+            idevento = Integer.parseInt(txtCodigoEvento.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "É necessário associar um evento aos serviços antes de salvar.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-		try {
+        DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Adicione pelo menos um serviço antes de salvar.", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-			List<Aluguel> lista = new ArrayList<>();
-			String sql = "select i.id, p.descricao, i.qtd, p.preco, i.subtotal from tb_itensvendas as i "
-					+ " inner join tb_produtos as p on (i.produto_id = p.id) where i.venda_id = ?";
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String codigoServico = (String) model.getValueAt(i, 0);
+            String nomeServico = (String) model.getValueAt(i, 1);
+            int quantidade = Integer.parseInt((String) model.getValueAt(i, 2));
+            double valorUnitario = Double.parseDouble((String) model.getValueAt(i, 3));
+            double subtotal = Double.parseDouble(model.getValueAt(i, 4).toString());
 
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			int codigo = '?';
-			ps.setInt(1, codigo);
+            inserirItemAluguel(idevento, codigoServico, nomeServico, quantidade, valorUnitario, subtotal);
+        }
 
-			ResultSet rs = ps.executeQuery();// sempre criar esse objeto e ele reccebe essa execução (sql)
+        JOptionPane.showMessageDialog(null, "Itens de aluguel salvos no banco de dados com sucesso!", "Confirmação",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 
-			while (rs.next()) {
+    public static void limparCamposServico(javax.swing.JTextField txtCodigoServico,
+            javax.swing.JTextField txtNomeServico, javax.swing.JTextField txtQuantidade,
+            javax.swing.JTextField txtValorUnit) {
+        txtCodigoServico.setText("");
+        txtNomeServico.setText("");
+        txtQuantidade.setText("");
+        txtValorUnit.setText("");
+    }
 
-				AluguelVO item = new AluguelVO();
-				Aluguel servicos = new Aluguel();
+    public static Servico buscarServicoNoBanco(String codigoServico) {
+        Servico servico = null;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/tasktide", "root", "root");
+            String sql = "SELECT nome, valorUnit FROM tbproduto WHERE codigo = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, codigoServico);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                String nomeServico = rs.getString("nome");
+                double valorUnit = rs.getDouble("valorUnit");
+                servico = new Servico(nomeServico, valorUnit);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        }
+        return servico;
+    }
 
-				item.setCodigo(rs.getInt("codigo"));
-				item.setNome(rs.getString("nome"));
-				item.setQuantidade(rs.getInt("quantidade"));
-				item.setValorUnit(rs.getFloat("valorUnit"));
-			}
-			return lista;
-		} catch (SQLException erro) {
+    public static void editarItem(JTable tblServico, javax.swing.JTextField txtCodigoServico,
+            javax.swing.JTextField txtNomeServico, javax.swing.JTextField txtQuantidade,
+            javax.swing.JTextField txtValorUnit) {
+        int selectedRow = tblServico.getSelectedRow();
 
-			JOptionPane.showMessageDialog(null, "Erro" + erro);
-			return null;
-		}
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um item para editar.", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-	}
+        DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
 
-	public AluguelVO BuscaPorCodigo(int parseInt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        txtCodigoServico.setText((String) model.getValueAt(selectedRow, 0));
+        txtNomeServico.setText((String) model.getValueAt(selectedRow, 1));
+        txtQuantidade.setText((String) model.getValueAt(selectedRow, 2));
+        txtValorUnit.setText((String) model.getValueAt(selectedRow, 3));
 
-	public AluguelVO BuscarServicos(int parseInt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        habilitarEdicaoCamposServico(txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit);
+    }
 
-	public void consultarDadosNaView() {
-		String url = "jdbc:mysql://localhost:3306/tasktide";
-		String usuario = "root";
-		String senha = "root";
+    public static void habilitarEdicaoCamposServico(javax.swing.JTextField txtCodigoServico,
+            javax.swing.JTextField txtNomeServico, javax.swing.JTextField txtQuantidade,
+            javax.swing.JTextField txtValorUnit) {
+        txtCodigoServico.setEditable(false);
+        txtNomeServico.setEditable(true);
+        txtQuantidade.setEditable(true);
+        txtValorUnit.setEditable(true);
+    }
 
-		try (Connection connection = DriverManager.getConnection(url, usuario, senha)) {
-			String sql = "SELECT codigo, nome, total FROM evento_aluguel_view";
-			try (PreparedStatement statement = connection.prepareStatement(sql)) {
-				ResultSet resultSet = statement.executeQuery();
+    public static void salvarAlteracoes(JTable tblServico, javax.swing.JTextField txtCodigoServico,
+            javax.swing.JTextField txtNomeServico, javax.swing.JTextField txtQuantidade,
+            javax.swing.JTextField txtValorUnit, double total, javax.swing.JTextField txtTotal) {
+        int selectedRow = tblServico.getSelectedRow();
 
-				while (resultSet.next()) {
-					String codigoEvento = resultSet.getString("codigo");
-					String nomeEvento = resultSet.getString("nome");
-					double totalAluguel = resultSet.getDouble("total");
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um item para editar.", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-					// Exibir os dados usando JOptionPane
-					String mensagem = "Código do Evento: " + codigoEvento + "\n" + "Nome do Evento: " + nomeEvento
-							+ "\n" + "Total do Aluguel: " + totalAluguel;
-					JOptionPane.showMessageDialog(null, mensagem, "Dados do Evento e Aluguel",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-		} catch (SQLException e) {
-			// Lidar com exceções e mostrar mensagens de erro com JOptionPane
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao consultar os dados:\n" + e.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja salvar as alterações?",
+                "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (confirmacao != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+        model.setValueAt(txtNomeServico.getText(), selectedRow, 1);
+        model.setValueAt(txtQuantidade.getText(), selectedRow, 2);
+        model.setValueAt(txtValorUnit.getText(), selectedRow, 3);
+
+        int quantidade = Integer.parseInt(txtQuantidade.getText());
+        double valorUnitario = Double.parseDouble(txtValorUnit.getText());
+        double subtotal = quantidade * valorUnitario;
+        model.setValueAt(subtotal, selectedRow, 4);
+
+        desabilitarEdicaoCamposServico(txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit);
+        limparCamposServico(txtCodigoServico, txtNomeServico, txtQuantidade, txtValorUnit);
+        atualizarTotal(tblServico, txtTotal);
+    }
+
+    public static void desabilitarEdicaoCamposServico(javax.swing.JTextField txtCodigoServico,
+            javax.swing.JTextField txtNomeServico, javax.swing.JTextField txtQuantidade,
+            javax.swing.JTextField txtValorUnit) {
+        txtCodigoServico.setEditable(false);
+        txtNomeServico.setEditable(false);
+        txtQuantidade.setEditable(false);
+        txtValorUnit.setEditable(false);
+    }
+
+    public static void atualizarTotal(JTable tblServico, javax.swing.JTextField txtTotal) {
+        double novoTotal = 0.0;
+        DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            double subtotal = (double) model.getValueAt(i, 4);
+            novoTotal += subtotal;
+        }
+
+        txtTotal.setText(String.valueOf(novoTotal));
+    }
+
+    public static void excluirItem(JTable tblServico, double total, javax.swing.JTextField txtTotal) {
+        DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+        int selectedRow = tblServico.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double valorSubtraido = (double) model.getValueAt(selectedRow, 4);
+
+        int choice = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esta linha?",
+                "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            model.removeRow(selectedRow);
+
+            total -= valorSubtraido;
+            txtTotal.setText(String.valueOf(total));
+        }
+    }
+
+    public static void inserirItemAluguel(int idevento, String codigoServico, String nomeServico,
+            int quantidade, double valorUnitario, double subtotal) {
+        String url = "jdbc:mysql://localhost:3306/tasktide";
+        String usuario = "root";
+        String senha = "root";
+
+        try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+            String query = "INSERT INTO aluguel_servicos (idevento, codigo_servico, nome_servico, quantidade, valor_unitario, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement pst = conexao.prepareStatement(query)) {
+                pst.setInt(1, idevento);
+                pst.setString(2, codigoServico);
+                pst.setString(3, nomeServico);
+                pst.setInt(4, quantidade);
+                pst.setDouble(5, valorUnitario);
+                pst.setDouble(6, subtotal);
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar item de aluguel.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static class Servico {
+    	public String nomeServico;
+    	public double valorUnit;
+
+        public Servico(String nomeServico, double valorUnit) {
+            this.nomeServico = nomeServico;
+            this.valorUnit = valorUnit;
+        }
+
+        public String getNomeServico() {
+            return nomeServico;
+        }
+
+        public double getValorUnit() {
+            return valorUnit;
+        }
+    }
 }

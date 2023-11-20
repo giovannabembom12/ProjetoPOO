@@ -5,9 +5,10 @@ public class AluguelVO {
 	 public String nome;
 	 public int quantidade;
 	 public double valorUnit;
+	 public double subTotal;
 	 public double total;
 	
-	public void AluguelServicos(int codigo, String nome, int quantidade, double valorUnit, double total) {
+	public void AluguelServicos(int codigo, String nome, int quantidade, double valorUnit, double subTotal, double total) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.quantidade = quantidade;
@@ -45,6 +46,14 @@ public class AluguelVO {
 
 	public void setValorUnit(double valorUnit) {
 		this.valorUnit = valorUnit;
+	}
+	
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
 	}
 	
 	public double getTotal() {

@@ -1,0 +1,929 @@
+package com.view;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+public class Aluguel extends javax.swing.JFrame {
+
+	public double total, valorUtilitario, subTotal;
+	int quantidade;
+	DefaultTableModel carrinho;
+
+	public Aluguel() {
+		initComponents();
+	}
+
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">
+	private void initComponents() {
+
+		jPanel1 = new javax.swing.JPanel();
+		jPanel2 = new javax.swing.JPanel();
+		lblLogo = new javax.swing.JLabel();
+		btnSobreNos = new javax.swing.JButton();
+		btnConfiguracoes = new javax.swing.JButton();
+		btnManualUsuario = new javax.swing.JButton();
+		jPanel3 = new javax.swing.JPanel();
+		lblAluguel = new javax.swing.JLabel();
+		lblDescricao = new javax.swing.JLabel();
+		lblCodigoEvento = new javax.swing.JLabel();
+		lblNomeEvento = new javax.swing.JLabel();
+		lblCodigoServico = new javax.swing.JLabel();
+		lblQuantidade = new javax.swing.JLabel();
+		lblNomeServico = new javax.swing.JLabel();
+		lblValorUnit = new javax.swing.JLabel();
+		lblDadosEvento = new javax.swing.JLabel();
+		lblDadosServico = new javax.swing.JLabel();
+		jSeparator1 = new javax.swing.JSeparator();
+		jSeparator2 = new javax.swing.JSeparator();
+		jSeparator3 = new javax.swing.JSeparator();
+		jSeparator4 = new javax.swing.JSeparator();
+		btnBuscarEvento = new javax.swing.JButton();
+		txtCodigoServico = new javax.swing.JTextField();
+		txtNomeEvento = new javax.swing.JTextField();
+		btnBuscarServico = new javax.swing.JButton();
+		txtNomeServico = new javax.swing.JTextField();
+		txtCodigoEvento = new javax.swing.JTextField();
+		txtValorUnit = new javax.swing.JTextField();
+		txtQuantidade = new javax.swing.JTextField();
+		btnVoltar = new javax.swing.JButton();
+		btnAddItem = new javax.swing.JButton();
+		jPanel4 = new javax.swing.JPanel();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		tblServico = new javax.swing.JTable();
+		btnSalvarAlt = new javax.swing.JButton();
+		btnEditar = new javax.swing.JButton();
+		btnExcluir = new javax.swing.JButton();
+		btnSalvar = new javax.swing.JButton();
+		jPanel5 = new javax.swing.JPanel();
+		lblTotal = new javax.swing.JLabel();
+		txtTotal = new javax.swing.JTextField();
+
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setExtendedState(6);
+		setMaximumSize(new java.awt.Dimension(1024, 768));
+		setMinimumSize(new java.awt.Dimension(800, 600));
+		setPreferredSize(new java.awt.Dimension(800, 600));
+
+		jPanel1.setBackground(new java.awt.Color(22, 43, 64));
+
+		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+		lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\LogoComFonte.png")); // NOI18N
+
+		btnSobreNos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSobreNos.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Downloads\\IconeSobreNos.png")); // NOI18N
+		btnSobreNos.setText(" Sobre Nós");
+		btnSobreNos.setBorder(null);
+		btnSobreNos.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSobreNosActionPerformed(evt);
+			}
+		});
+
+		btnConfiguracoes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnConfiguracoes.setIcon(new javax.swing.JLabel() {
+			public javax.swing.Icon getIcon() {
+				try {
+					return new javax.swing.ImageIcon(
+							new java.net.URL("file:/C:/Users/PC/Downloads/IconeEngrenagem.png"));
+				} catch (java.net.MalformedURLException e) {
+				}
+				return null;
+			}
+		}.getIcon());
+		btnConfiguracoes.setText(" Configurações e Suporte");
+		btnConfiguracoes.setBorder(null);
+
+		btnManualUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnManualUsuario.setIcon(new javax.swing.JLabel() {
+			public javax.swing.Icon getIcon() {
+				try {
+					return new javax.swing.ImageIcon(
+							new java.net.URL("file:/C:/Users/PC/Downloads/IconeManualUsuario.png"));
+				} catch (java.net.MalformedURLException e) {
+				}
+				return null;
+			}
+		}.getIcon());
+		btnManualUsuario.setText(" Manual do Usuário");
+		btnManualUsuario.setBorder(null);
+		btnManualUsuario.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnManualUsuarioActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+		jPanel2.setLayout(jPanel2Layout);
+		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(30, 30, 30).addComponent(lblLogo)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSobreNos).addGap(120, 120, 120).addComponent(btnConfiguracoes)
+						.addGap(120, 120, 120).addComponent(btnManualUsuario).addGap(115, 115, 115)));
+		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+						Short.MAX_VALUE)
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(42, 42, 42)
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnSobreNos).addComponent(btnConfiguracoes)
+								.addComponent(btnManualUsuario))
+						.addContainerGap(31, Short.MAX_VALUE)));
+
+		jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+		lblAluguel.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+		lblAluguel.setText("Aluguel de Serviços");
+
+		lblDescricao.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+		lblDescricao.setForeground(new java.awt.Color(102, 102, 102));
+		lblDescricao.setText("Os campos abaixo serão utilizados para alugar serviços em eventos do sistema.");
+
+		lblCodigoEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblCodigoEvento.setText("Código:");
+
+		lblNomeEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblNomeEvento.setText("Nome:");
+
+		lblCodigoServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblCodigoServico.setText("Código:");
+
+		lblQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblQuantidade.setText("Quantidade:");
+
+		lblNomeServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblNomeServico.setText("Nome:");
+
+		lblValorUnit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblValorUnit.setText("Valor Unit.:");
+
+		lblDadosEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblDadosEvento.setText("Dados do Evento");
+
+		lblDadosServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+		lblDadosServico.setText("Dados do Serviço");
+
+		btnBuscarEvento.setBackground(new java.awt.Color(22, 43, 64));
+		btnBuscarEvento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnBuscarEvento.setForeground(new java.awt.Color(255, 255, 255));
+		btnBuscarEvento.setText("Buscar");
+		btnBuscarEvento.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnBuscarEventoActionPerformed(evt);
+			}
+		});
+
+		txtCodigoServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtNomeEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		btnBuscarServico.setBackground(new java.awt.Color(22, 43, 64));
+		btnBuscarServico.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnBuscarServico.setForeground(new java.awt.Color(255, 255, 255));
+		btnBuscarServico.setText("Buscar");
+		btnBuscarServico.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnBuscarServicoActionPerformed(evt);
+			}
+		});
+
+		txtNomeServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtCodigoEvento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtValorUnit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		txtQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+		btnVoltar.setBackground(new java.awt.Color(22, 43, 64));
+		btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+		btnVoltar.setText("Voltar");
+		btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnVoltarActionPerformed(evt);
+			}
+		});
+
+		btnAddItem.setBackground(new java.awt.Color(22, 43, 64));
+		btnAddItem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnAddItem.setForeground(new java.awt.Color(255, 255, 255));
+		btnAddItem.setText("Adicionar Item");
+		btnAddItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnAddItemActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+		jPanel3.setLayout(jPanel3Layout);
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+						.addGroup(jPanel3Layout.createSequentialGroup().addGap(169, 169, 169).addComponent(lblAluguel))
+						.addGroup(jPanel3Layout.createSequentialGroup().addGap(34, 34, 34).addComponent(lblDescricao))
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel3Layout.createSequentialGroup()
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnVoltar).addGap(18, 18, 18).addComponent(btnAddItem))
+								.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+										jPanel3Layout.createSequentialGroup().addGap(61, 61, 61).addGroup(jPanel3Layout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addGroup(jPanel3Layout.createSequentialGroup()
+														.addComponent(lblDadosEvento)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(jSeparator1,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 305,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addComponent(jSeparator2).addComponent(jSeparator3)
+												.addGroup(jPanel3Layout.createSequentialGroup()
+														.addComponent(lblDadosServico)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jSeparator4,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 310,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+														jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		false)
+																.addGroup(jPanel3Layout.createSequentialGroup()
+																		.addComponent(lblCodigoEvento)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																		.addComponent(txtCodigoEvento,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				100,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addComponent(btnBuscarEvento,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				130,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addGroup(jPanel3Layout.createSequentialGroup()
+																		.addComponent(lblNomeEvento).addGap(18, 18, 18)
+																		.addComponent(txtNomeEvento,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				256,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)))
+																.addGap(51, 51, 51))
+												.addGroup(jPanel3Layout.createSequentialGroup().addGap(54, 54, 54)
+														.addGroup(jPanel3Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.TRAILING,
+																		false)
+																.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+																		jPanel3Layout.createSequentialGroup()
+																				.addComponent(lblQuantidade)
+																				.addPreferredGap(
+																						javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																				.addComponent(txtQuantidade,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						64,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addGap(18, 18, 18)
+																				.addComponent(lblValorUnit)
+																				.addPreferredGap(
+																						javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																				.addComponent(txtValorUnit))
+																.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+																		jPanel3Layout.createSequentialGroup()
+																				.addComponent(lblNomeServico)
+																				.addGap(18, 18, 18)
+																				.addComponent(txtNomeServico))
+																.addGroup(jPanel3Layout.createSequentialGroup()
+																		.addComponent(lblCodigoServico)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																		.addComponent(txtCodigoServico,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				100,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGap(26, 26, 26)
+																		.addComponent(btnBuscarServico,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				130,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+						.addContainerGap(46, Short.MAX_VALUE)));
+		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGap(30, 30, 30).addComponent(lblAluguel)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(lblDescricao).addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addComponent(lblDadosEvento).addComponent(jSeparator1,
+										javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblCodigoEvento)
+								.addComponent(btnBuscarEvento, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(txtCodigoEvento, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(20, 20, 20)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblNomeEvento)
+								.addComponent(txtNomeEvento, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(12, 12, 12)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel3Layout.createSequentialGroup()
+										.addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(25, 25, 25).addComponent(lblDadosServico))
+								.addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(12, 12, 12)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblCodigoServico)
+								.addComponent(btnBuscarServico, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(txtCodigoServico, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblNomeServico)
+								.addComponent(txtNomeServico, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblQuantidade).addComponent(lblValorUnit)
+								.addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtValorUnit, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(30, 30, 30)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnAddItem).addComponent(btnVoltar))
+						.addGap(31, 31, 31)));
+
+		jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+		tblServico.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+		}, new String[] { "Código", "Nome", "Qntd.", "Valor Unit.", "Sub-Total" }) {
+			boolean[] canEdit = new boolean[] { false, false, false, false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane1.setViewportView(tblServico);
+		if (tblServico.getColumnModel().getColumnCount() > 0) {
+			tblServico.getColumnModel().getColumn(0).setResizable(false);
+			tblServico.getColumnModel().getColumn(1).setResizable(false);
+			tblServico.getColumnModel().getColumn(2).setResizable(false);
+			tblServico.getColumnModel().getColumn(3).setResizable(false);
+			tblServico.getColumnModel().getColumn(4).setResizable(false);
+		}
+
+		btnSalvarAlt.setBackground(new java.awt.Color(22, 43, 64));
+		btnSalvarAlt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSalvarAlt.setForeground(new java.awt.Color(255, 255, 255));
+		btnSalvarAlt.setText("Salvar Alterações");
+		btnSalvarAlt.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSalvarAltActionPerformed(evt);
+			}
+		});
+
+		btnEditar.setBackground(new java.awt.Color(22, 43, 64));
+		btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+		btnEditar.setText("Editar");
+		btnEditar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnEditarActionPerformed(evt);
+			}
+		});
+
+		btnExcluir.setBackground(new java.awt.Color(22, 43, 64));
+		btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+		btnExcluir.setText("Excluir");
+		btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnExcluirActionPerformed(evt);
+			}
+		});
+
+		btnSalvar.setBackground(new java.awt.Color(22, 43, 64));
+		btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+		btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+		btnSalvar.setText("Salvar");
+		btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSalvarActionPerformed(evt);
+			}
+		});
+
+		jPanel5.setBackground(new java.awt.Color(22, 43, 64));
+
+		lblTotal.setBackground(new java.awt.Color(22, 43, 64));
+		lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+		lblTotal.setForeground(new java.awt.Color(255, 255, 255));
+		lblTotal.setText("Total: R$");
+
+		javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+		jPanel5.setLayout(jPanel5Layout);
+		jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup().addGap(14, 14, 14).addComponent(lblTotal)
+						.addContainerGap(16, Short.MAX_VALUE)));
+		jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup().addGap(14, 14, 14).addComponent(lblTotal)
+						.addContainerGap(15, Short.MAX_VALUE)));
+
+		txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+		jPanel4.setLayout(jPanel4Layout);
+		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup().addGroup(jPanel4Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel4Layout.createSequentialGroup().addGap(49, 49, 49)
+								.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(jPanel4Layout.createSequentialGroup().addComponent(btnSalvarAlt)
+												.addGap(18, 18, 18).addComponent(btnEditar).addGap(18, 18, 18)
+												.addComponent(btnExcluir).addGap(18, 18, 18).addComponent(btnSalvar))
+										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510,
+												javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addGroup(jPanel4Layout.createSequentialGroup().addGap(211, 211, 211)
+								.addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(0, 0, 0).addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
+										javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(46, Short.MAX_VALUE)));
+		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup().addGap(36, 36, 36)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(txtTotal))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnSalvarAlt).addComponent(btnEditar).addComponent(btnExcluir)
+								.addComponent(btnSalvar))
+						.addGap(31, 31, 31)));
+
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+						Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(68, 68, 68)
+						.addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(77, 77, 77)
+						.addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(30, 30, 30)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap(51, Short.MAX_VALUE)));
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+	}// </editor-fold>
+
+	private void btnManualUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+		Menu menu = new Menu();
+		menu.setVisible(true);
+		this.dispose();
+	}
+
+	private void limparCamposServico() {
+		txtCodigoServico.setText("");
+		txtNomeServico.setText("");
+		txtQuantidade.setText("");
+		txtValorUnit.setText("");
+	}
+
+	private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {
+		quantidade = Integer.parseInt(txtQuantidade.getText());
+		valorUtilitario = Double.parseDouble(txtValorUnit.getText());
+		subTotal = quantidade * valorUtilitario;
+		total += subTotal;
+		txtTotal.setText(String.valueOf(total));
+
+		// Obtém o modelo da tabela (DefaultTableModel)
+		DefaultTableModel carrinho = (DefaultTableModel) tblServico.getModel();
+
+		// Adiciona a nova linha ao modelo da tabela
+		carrinho.addRow(new Object[] { txtCodigoServico.getText(), txtNomeServico.getText(), txtQuantidade.getText(),
+				txtValorUnit.getText(), subTotal });
+
+		// Limpa os campos relacionados ao serviço
+		limparCamposServico();
+	}
+
+	private void btnBuscarServicoActionPerformed(java.awt.event.ActionEvent evt) {
+		String codigoServico = txtCodigoServico.getText();
+
+		if (!codigoServico.isEmpty()) {
+			Servico servico = buscarServicoNoBanco(codigoServico);
+
+			if (servico != null) {
+				txtNomeServico.setText(servico.getNomeServico());
+				txtValorUnit.setText(Double.toString(servico.getValorUnit()));
+			} else {
+				JOptionPane.showMessageDialog(this, "Serviço não encontrado no banco de dados", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Campo Código do Serviço está vazio", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	class Servico {
+		private String nomeServico;
+		private double valorUnit;
+
+		public Servico(String nomeServico, double valorUnit) {
+			this.nomeServico = nomeServico;
+			this.valorUnit = valorUnit;
+		}
+
+		public String getNomeServico() {
+			return nomeServico;
+		}
+
+		public double getValorUnit() {
+			return valorUnit;
+		}
+	}
+
+	private Servico buscarServicoNoBanco(String codigoServico) {
+		Servico servico = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/tasktide", "root", "root");
+			String sql = "SELECT nome, valorUnit FROM tbproduto WHERE codigo = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, codigoServico);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				String nomeServico = rs.getString("nome");
+				double valorUnit = rs.getDouble("valorUnit");
+				servico = new Servico(nomeServico, valorUnit);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return servico;
+	}
+
+	private void btnBuscarEventoActionPerformed(java.awt.event.ActionEvent evt) {
+		String codigoEvento = txtCodigoEvento.getText();
+
+		if (!codigoEvento.isEmpty()) {
+			String nomeEvento = buscarNomeDoEventoNoBanco(codigoEvento);
+
+			if (nomeEvento != null) {
+				txtNomeEvento.setText(nomeEvento);
+			} else {
+				JOptionPane.showMessageDialog(this, "Evento não encontrado no banco de dados", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Campo Código do Evento está vazio", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private String buscarNomeDoEventoNoBanco(String codigoEvento) {
+		String nomeEvento = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/tasktide", "root", "root");
+			String sql = "SELECT nome_evento FROM tbEvento WHERE idevent = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, codigoEvento);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				nomeEvento = rs.getString("nome_evento");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return nomeEvento;
+	}
+
+	private void editarItem() {
+		int selectedRow = tblServico.getSelectedRow();
+
+		if (selectedRow == -1) {
+			JOptionPane.showMessageDialog(this, "Por favor, selecione um item para editar.", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		// Obtém o modelo da tabela (DefaultTableModel)
+		DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+		// Preenche os campos de edição com os dados do item selecionado
+		txtCodigoServico.setText((String) model.getValueAt(selectedRow, 0));
+		txtNomeServico.setText((String) model.getValueAt(selectedRow, 1));
+		txtQuantidade.setText((String) model.getValueAt(selectedRow, 2));
+		txtValorUnit.setText((String) model.getValueAt(selectedRow, 3));
+
+		// Habilita a edição dos campos
+		habilitarEdicaoCamposServico();
+	}
+
+	private void habilitarEdicaoCamposServico() {
+		txtCodigoServico.setEditable(false); // Você pode alterar para true se for necessário editar o código
+		txtNomeServico.setEditable(true);
+		txtQuantidade.setEditable(true);
+		txtValorUnit.setEditable(true);
+	}
+
+	private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+		editarItem();
+	}
+
+	// Adicione este método à sua classe
+	private void atualizarTotal() {
+		double novoTotal = 0.0;
+		DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+		for (int i = 0; i < model.getRowCount(); i++) {
+			double subtotal = (double) model.getValueAt(i, 4);
+			novoTotal += subtotal;
+		}
+
+		txtTotal.setText(String.valueOf(novoTotal));
+	}
+
+	// Modifique o método btnSalvarAltActionPerformed conforme abaixo
+	private void btnSalvarAltActionPerformed(java.awt.event.ActionEvent evt) {
+		int selectedRow = tblServico.getSelectedRow();
+
+		if (selectedRow == -1) {
+			JOptionPane.showMessageDialog(this, "Por favor, selecione um item para editar.", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja salvar as alterações?",
+				"Confirmação", JOptionPane.YES_NO_OPTION);
+		if (confirmacao != JOptionPane.YES_OPTION) {
+			// Se o usuário não confirmar, não faz nada
+			return;
+		}
+
+		// Obtém o modelo da tabela (DefaultTableModel)
+		DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+		// Atualiza o item na tabela
+		model.setValueAt(txtNomeServico.getText(), selectedRow, 1);
+		model.setValueAt(txtQuantidade.getText(), selectedRow, 2);
+		model.setValueAt(txtValorUnit.getText(), selectedRow, 3);
+
+		// Recalcula e atualiza o subtotal
+		int quantidade = Integer.parseInt(txtQuantidade.getText());
+		double valorUnitario = Double.parseDouble(txtValorUnit.getText());
+		double subtotal = quantidade * valorUnitario;
+		model.setValueAt(subtotal, selectedRow, 4);
+
+		// Desabilita a edição dos campos e limpa os campos
+		desabilitarEdicaoCamposServico();
+		limparCamposServico();
+
+		// Atualiza a tabela após a edição
+		// Você pode chamar aqui o método que atualiza a tabela (caso tenha um método
+		// específico)
+		// Exemplo: atualizarTabelaServico();
+
+		// Atualiza o total
+		atualizarTotal();
+	}
+
+	private void desabilitarEdicaoCamposServico() {
+		txtCodigoServico.setEditable(false);
+		txtNomeServico.setEditable(false);
+		txtQuantidade.setEditable(false);
+		txtValorUnit.setEditable(false);
+	}
+
+	private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+		// Obtém o modelo da tabela
+		DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+
+		// Verifica se uma linha está selecionada
+		int selectedRow = tblServico.getSelectedRow();
+		if (selectedRow == -1) {
+			// Nenhuma linha selecionada, exibe uma mensagem de erro
+			JOptionPane.showMessageDialog(this, "Selecione uma linha para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		// Obtém o valor a ser subtraído do total
+		double valorSubtraido = (double) model.getValueAt(selectedRow, 4);
+
+		// Confirmação antes de excluir
+		int choice = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esta linha?", "Confirmação",
+				JOptionPane.YES_NO_OPTION);
+
+		if (choice == JOptionPane.YES_OPTION) {
+			// Remove a linha selecionada do modelo da tabela
+			model.removeRow(selectedRow);
+
+			// Atualiza o valor total
+			total -= valorSubtraido;
+			txtTotal.setText(String.valueOf(total));
+		}
+	}
+
+	private void btnSobreNosActionPerformed(java.awt.event.ActionEvent evt) {
+		SobreNos sobrenos = new SobreNos();
+		sobrenos.setVisible(true);
+		this.dispose();
+	}
+
+	private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
+		// Obtenha o idevento do campo de texto
+		int idevento = 0;
+
+		try {
+			idevento = Integer.parseInt(txtCodigoEvento.getText());
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "É necessário associar um evento aos serviços antes de salvar.",
+					"Aviso", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		// Verifique se há pelo menos um serviço na tabela
+		DefaultTableModel model = (DefaultTableModel) tblServico.getModel();
+		if (model.getRowCount() == 0) {
+			JOptionPane.showMessageDialog(this, "Adicione pelo menos um serviço antes de salvar.", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		// Itere sobre as linhas da tabela para obter os dados e inserir no banco de
+		// dados
+		for (int i = 0; i < model.getRowCount(); i++) {
+			String codigoServico = (String) model.getValueAt(i, 0);
+			String nomeServico = (String) model.getValueAt(i, 1);
+			int quantidade = Integer.parseInt((String) model.getValueAt(i, 2));
+			double valorUnitario = Double.parseDouble((String) model.getValueAt(i, 3));
+			double subtotal = Double.parseDouble(model.getValueAt(i, 4).toString());
+
+			// Insira o item no banco de dados
+			inserirItemAluguel(idevento, codigoServico, nomeServico, quantidade, valorUnitario, subtotal);
+		}
+
+		// Limpe os campos ou atualize a tabela conforme necessário
+		limparCamposServico();
+
+		// Exiba a mensagem de confirmação
+		JOptionPane.showMessageDialog(this, "Itens de aluguel salvos no banco de dados com sucesso!", "Confirmação",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void inserirItemAluguel(int idevento, String codigoServico, String nomeServico, int quantidade,
+			double valorUnitario, double subtotal) {
+		String url = "jdbc:mysql://localhost:3306/tasktide";
+		String usuario = "root";
+		String senha = "root";
+
+		try (Connection conexao = DriverManager.getConnection(url, usuario, senha)) {
+			String query = "INSERT INTO aluguel_servicos (idevento, codigo_servico, nome_servico, quantidade, valor_unitario, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
+			try (PreparedStatement pst = conexao.prepareStatement(query)) {
+				pst.setInt(1, idevento);
+				pst.setString(2, codigoServico);
+				pst.setString(3, nomeServico);
+				pst.setInt(4, quantidade);
+				pst.setDouble(5, valorUnitario);
+				pst.setDouble(6, subtotal);
+				pst.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Erro ao salvar item de aluguel.", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		/* Set the Nimbus look and feel */
+		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+		// (optional) ">
+		/*
+		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+		 * look and feel. For details see
+		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+		 */
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(Aluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(Aluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(Aluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(Aluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
+		// </editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new Aluguel().setVisible(true);
+			}
+		});
+	}
+
+	// Variables declaration - do not modify
+	private javax.swing.JButton btnAddItem;
+	private javax.swing.JButton btnBuscarEvento;
+	private javax.swing.JButton btnBuscarServico;
+	private javax.swing.JButton btnConfiguracoes;
+	private javax.swing.JButton btnEditar;
+	private javax.swing.JButton btnExcluir;
+	private javax.swing.JButton btnManualUsuario;
+	private javax.swing.JButton btnSalvar;
+	private javax.swing.JButton btnSalvarAlt;
+	private javax.swing.JButton btnSobreNos;
+	private javax.swing.JButton btnVoltar;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JPanel jPanel2;
+	private javax.swing.JPanel jPanel3;
+	private javax.swing.JPanel jPanel4;
+	private javax.swing.JPanel jPanel5;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JSeparator jSeparator1;
+	private javax.swing.JSeparator jSeparator2;
+	private javax.swing.JSeparator jSeparator3;
+	private javax.swing.JSeparator jSeparator4;
+	private javax.swing.JLabel lblAluguel;
+	private javax.swing.JLabel lblCodigoEvento;
+	private javax.swing.JLabel lblCodigoServico;
+	private javax.swing.JLabel lblDadosEvento;
+	private javax.swing.JLabel lblDadosServico;
+	private javax.swing.JLabel lblDescricao;
+	private javax.swing.JLabel lblLogo;
+	private javax.swing.JLabel lblNomeEvento;
+	private javax.swing.JLabel lblNomeServico;
+	private javax.swing.JLabel lblQuantidade;
+	private javax.swing.JLabel lblTotal;
+	private javax.swing.JLabel lblValorUnit;
+	private javax.swing.JTable tblServico;
+	private javax.swing.JTextField txtCodigoEvento;
+	private javax.swing.JTextField txtCodigoServico;
+	private javax.swing.JTextField txtNomeEvento;
+	private javax.swing.JTextField txtNomeServico;
+	private javax.swing.JTextField txtQuantidade;
+	private javax.swing.JTextField txtTotal;
+	private javax.swing.JTextField txtValorUnit;
+	// End of variables declaration
+}

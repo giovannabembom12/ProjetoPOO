@@ -1,0 +1,577 @@
+package com;
+
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class CalendarioTeste extends javax.swing.JFrame {
+		
+	private int anoAtual;
+	 private int mesAtual;
+	 
+	public CalendarioTeste() {
+        initComponents();
+        
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        anoAtual = cal.get(java.util.Calendar.YEAR);
+        mesAtual = cal.get(java.util.Calendar.MONTH);
+        atualizarCalendario(anoAtual, mesAtual);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jpnMenuBranco = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        lblTaskTide = new javax.swing.JLabel();
+        btnManualDoUsuario = new javax.swing.JButton();
+        btnSobreNos = new javax.swing.JButton();
+        btnConfiguracoesESuporte = new javax.swing.JButton();
+        jpnPainelComInformacoes = new javax.swing.JPanel();
+        lblAnosEvento = new javax.swing.JLabel();
+        lblEventoMes1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbTabelaComEventosDoDia = new javax.swing.JTable();
+        btnExcluir = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        jpnPainelComOCalendario = new javax.swing.JPanel();
+        lblCalendario = new javax.swing.JLabel();
+        lblAnoo = new javax.swing.JLabel();
+        lblMess = new javax.swing.JLabel();
+        jcbAnos = new javax.swing.JComboBox<>();
+        jcbMeses = new javax.swing.JComboBox<>();
+        jpnCalendario = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbCalendario = new javax.swing.JTable();
+        btnAnterior = new javax.swing.JButton();
+        btnProximo = new javax.swing.JButton();
+        lblMes = new javax.swing.JLabel();
+        lblAno = new javax.swing.JLabel();
+        lblTracinho = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Calendário");
+
+        jPanel1.setBackground(new java.awt.Color(22, 43, 64));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        jpnMenuBranco.setBackground(new java.awt.Color(255, 255, 255));
+        jpnMenuBranco.setLayout(null);
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Sobre nós");
+        jButton2.setBorder(null);
+        jpnMenuBranco.add(jButton2);
+        jButton2.setBounds(440, 96, 67, 27);
+
+        lblTaskTide.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblTaskTide.setForeground(new java.awt.Color(0, 0, 0));
+        lblTaskTide.setText("TaskTide");
+        jpnMenuBranco.add(lblTaskTide);
+        lblTaskTide.setBounds(130, 30, 110, 30);
+
+        btnManualDoUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        btnManualDoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnManualDoUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        btnManualDoUsuario.setText("Manual do Usuário");
+        btnManualDoUsuario.setBorder(null);
+        btnManualDoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManualDoUsuarioActionPerformed(evt);
+            }
+        });
+        jpnMenuBranco.add(btnManualDoUsuario);
+        btnManualDoUsuario.setBounds(980, 30, 180, 30);
+
+        btnSobreNos.setBackground(new java.awt.Color(255, 255, 255));
+        btnSobreNos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSobreNos.setForeground(new java.awt.Color(0, 0, 0));
+        btnSobreNos.setText("Sobre nós");
+        btnSobreNos.setBorder(null);
+        jpnMenuBranco.add(btnSobreNos);
+        btnSobreNos.setBounds(410, 30, 80, 30);
+
+        btnConfiguracoesESuporte.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfiguracoesESuporte.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnConfiguracoesESuporte.setForeground(new java.awt.Color(0, 0, 0));
+        btnConfiguracoesESuporte.setText("Configurações e suporte");
+        btnConfiguracoesESuporte.setBorder(null);
+        btnConfiguracoesESuporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracoesESuporteActionPerformed(evt);
+            }
+        });
+        jpnMenuBranco.add(btnConfiguracoesESuporte);
+        btnConfiguracoesESuporte.setBounds(660, 30, 180, 30);
+
+        jpnPainelComInformacoes.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelComInformacoes.setLayout(null);
+
+        lblAnosEvento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAnosEvento.setForeground(new java.awt.Color(0, 0, 0));
+        lblAnosEvento.setText("/ 2023");
+        jpnPainelComInformacoes.add(lblAnosEvento);
+        lblAnosEvento.setBounds(220, 20, 60, 30);
+
+        lblEventoMes1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEventoMes1.setForeground(new java.awt.Color(0, 0, 0));
+        lblEventoMes1.setText("Eventos de Novembro");
+        jpnPainelComInformacoes.add(lblEventoMes1);
+        lblEventoMes1.setBounds(30, 20, 200, 30);
+        
+        jtbTabelaComEventosDoDia.setBackground(new java.awt.Color(255, 255, 255));
+        jtbTabelaComEventosDoDia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtbTabelaComEventosDoDia.setForeground(new java.awt.Color(0, 0, 0));
+        jtbTabelaComEventosDoDia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome do evento", "Dia"
+            }
+        ));
+        jtbTabelaComEventosDoDia.getColumnModel().getColumn(0).setPreferredWidth(200); // Defina o valor desejado
+
+        
+        jtbTabelaComEventosDoDia.setShowHorizontalLines(true);
+        jtbTabelaComEventosDoDia.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(jtbTabelaComEventosDoDia);
+
+        jpnPainelComInformacoes.add(jScrollPane2);
+        jScrollPane2.setBounds(30, 72, 520, 400);
+
+        btnExcluir.setBackground(new java.awt.Color(22, 43, 64));
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Excluir");
+        jpnPainelComInformacoes.add(btnExcluir);
+        btnExcluir.setBounds(370, 490, 80, 30);
+
+        btnVoltar.setBackground(new java.awt.Color(22, 43, 64));
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setText("Voltar");
+        jpnPainelComInformacoes.add(btnVoltar);
+        btnVoltar.setBounds(30, 490, 90, 30);
+
+        btnEditar.setBackground(new java.awt.Color(22, 43, 64));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        jpnPainelComInformacoes.add(btnEditar);
+        btnEditar.setBounds(470, 490, 80, 30);
+
+        jpnPainelComOCalendario.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPainelComOCalendario.setLayout(null);
+
+        lblCalendario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCalendario.setForeground(new java.awt.Color(0, 0, 0));
+        lblCalendario.setText("Calendário");
+        jpnPainelComOCalendario.add(lblCalendario);
+        lblCalendario.setBounds(110, 20, 120, 30);
+
+        lblAnoo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAnoo.setForeground(new java.awt.Color(0, 0, 0));
+        lblAnoo.setText("Ano:");
+        jpnPainelComOCalendario.add(lblAnoo);
+        lblAnoo.setBounds(440, 70, 50, 30);
+
+        lblMess.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMess.setForeground(new java.awt.Color(0, 0, 0));
+        lblMess.setText("Mês:");
+        jpnPainelComOCalendario.add(lblMess);
+        lblMess.setBounds(70, 70, 80, 30);
+
+        jcbAnos.setBackground(new java.awt.Color(255, 255, 255));
+        jcbAnos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbAnos.setForeground(new java.awt.Color(0, 0, 0));
+        jcbAnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2024", "2025", "2026" }));
+        jpnPainelComOCalendario.add(jcbAnos);
+        jcbAnos.setBounds(480, 70, 130, 30);
+
+        jcbMeses.setBackground(new java.awt.Color(255, 255, 255));
+        jcbMeses.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbMeses.setForeground(new java.awt.Color(0, 0, 0));
+        jcbMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro ", "Outubro", "Novembro", "Dezembro" }));
+        jpnPainelComOCalendario.add(jcbMeses);
+        jcbMeses.setBounds(110, 70, 190, 30);
+
+        jpnCalendario.setBackground(new java.awt.Color(22, 43, 64));
+        jpnCalendario.setLayout(null);
+
+        jtbCalendario.setBackground(new java.awt.Color(255, 255, 255));
+        jtbCalendario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jtbCalendario.setForeground(new java.awt.Color(0, 0, 0));
+        jtbCalendario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"
+            }
+        ));
+        jtbCalendario.setRowHeight(69);
+        
+        jtbCalendario.setAutoscrolls(false);
+        jtbCalendario.setShowHorizontalLines(true);
+        jtbCalendario.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(jtbCalendario);
+
+        jpnCalendario.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 50, 550, 350);
+
+        btnAnterior.setBackground(new java.awt.Color(22, 43, 64));
+        btnAnterior.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnterior.setText("<");
+        btnAnterior.setBorder(null);
+        jpnCalendario.add(btnAnterior);
+        btnAnterior.setBounds(0, 0, 96, 50);
+
+        btnProximo.setBackground(new java.awt.Color(22, 43, 64));
+        btnProximo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnProximo.setForeground(new java.awt.Color(255, 255, 255));
+        btnProximo.setText(">");
+        btnProximo.setBorder(null);
+        btnProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProximoActionPerformed(evt);
+            }
+        });
+        jpnCalendario.add(btnProximo);
+        btnProximo.setBounds(460, 0, 96, 50);
+
+        lblMes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblMes.setForeground(new java.awt.Color(255, 255, 255));
+        lblMes.setText("JANEIRO");
+        jpnCalendario.add(lblMes);
+        lblMes.setBounds(170, 10, 100, 30);
+
+        lblAno.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAno.setForeground(new java.awt.Color(255, 255, 255));
+        lblAno.setText("2023");
+        jpnCalendario.add(lblAno);
+        lblAno.setBounds(320, 16, 43, 20);
+
+        lblTracinho.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTracinho.setForeground(new java.awt.Color(255, 255, 255));
+        lblTracinho.setText("-");
+        jpnCalendario.add(lblTracinho);
+        lblTracinho.setBounds(280, 20, 20, 16);
+
+        jpnPainelComOCalendario.add(jpnCalendario);
+        jpnCalendario.setBounds(60, 120, 550, 400);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpnMenuBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jpnPainelComOCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jpnPainelComInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jpnMenuBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpnPainelComOCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addComponent(jpnPainelComInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 351, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jcbMeses.setSelectedIndex(10);
+        jtbCalendario.setRowHeight(69);
+        pack();
+        
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
+        
+        jcbAnos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                atualizarCalendario(Integer.parseInt(jcbAnos.getSelectedItem().toString()), jcbMeses.getSelectedIndex());
+            }
+        });
+
+        jcbMeses.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                atualizarCalendario(Integer.parseInt(jcbAnos.getSelectedItem().toString()), jcbMeses.getSelectedIndex());
+            }
+        });
+        
+        jtbCalendario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = jtbCalendario.rowAtPoint(evt.getPoint());
+                int col = jtbCalendario.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0) {
+                    Object cellValue = jtbCalendario.getValueAt(row, col);
+                    if (cellValue != null) {
+                        int diaSelecionado = Integer.parseInt(cellValue.toString());
+                        int mesSelecionado = jcbMeses.getSelectedIndex();
+                        int anoSelecionado = Integer.parseInt(jcbAnos.getSelectedItem().toString());
+                        
+                        carregarEventosDoDia(anoSelecionado, mesSelecionado, diaSelecionado);
+                    }
+                }
+            }
+        });
+        btnExcluir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int[] selectedRows = jtbTabelaComEventosDoDia.getSelectedRows();
+
+                if (selectedRows.length == 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada para exclusão.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o(s) evento(s) seleciondo(s)?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+                if (opcao == JOptionPane.YES_OPTION) {
+                    DefaultTableModel modelDosProdutosAdicionados = (DefaultTableModel) jtbTabelaComEventosDoDia.getModel();
+
+                    for (int i = selectedRows.length - 1; i >= 0; i--) {
+                        int rowIndex = selectedRows[i];
+                        String nomeEvento = modelDosProdutosAdicionados.getValueAt(rowIndex, 0).toString(); // Obtém o nome do evento
+
+                        modelDosProdutosAdicionados.removeRow(rowIndex);
+
+                        excluirEvento(nomeEvento);
+                    }
+                }
+
+            }
+        });
+
+        
+        btnEditar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int[] selectedRows = jtbTabelaComEventosDoDia.getSelectedRows();
+
+                if (selectedRows.length == 0) {
+                    JOptionPane.showMessageDialog(null, "Nenhum evento selecionado para edição.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja editar o(s) evento(s) selecionado(s)?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+                if (opcao == JOptionPane.YES_OPTION) {
+                //Lugarzinho pra botar oq vai rolar quando clicar "sim" no JOptionPane
+                }
+            }
+        });
+
+    }
+    
+    private void carregarEventosDoDia(int ano, int mes, int dia) {
+        DefaultTableModel modelEventos = (DefaultTableModel) jtbTabelaComEventosDoDia.getModel();
+        modelEventos.setRowCount(0);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Conexao conexaoBD = new Conexao();
+            conn = conexaoBD.conectaBD();
+
+            String sql = "SELECT nome, dataprevis FROM tbEvento WHERE dataprevis = ?";
+
+            stmt = conn.prepareStatement(sql);
+
+            java.sql.Date dataConsulta = java.sql.Date.valueOf(ano + "-" + (mes + 1) + "-" + dia);
+            stmt.setDate(1, dataConsulta);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String nomeEvento = rs.getString("nome");
+                String descricaoEvento = rs.getString("dataprevis");
+
+                modelEventos.addRow(new Object[]{nomeEvento, descricaoEvento});
+            }
+
+            if (modelEventos.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Não há eventos na data selecionada.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar eventos do dia: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    private void excluirEvento(String nomeEvento) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            Conexao conexaoBD = new Conexao();
+            conn = conexaoBD.conectaBD();
+
+            stmt = conn.createStatement();
+
+            String sql = "DELETE FROM tbEvento WHERE nome = '" + nomeEvento + "'";
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir evento: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    
+    private void atualizarCalendario(int ano, int mes) {
+        DefaultTableModel model = (DefaultTableModel) jtbCalendario.getModel();
+        model.setRowCount(0);
+
+        java.time.YearMonth yearMonthObject = java.time.YearMonth.of(ano, mes + 1);
+        int diasNoMes = yearMonthObject.lengthOfMonth();
+        java.time.LocalDate firstOfMonth = java.time.LocalDate.of(ano, mes + 1, 1);
+        int diaDaSemana = firstOfMonth.getDayOfWeek().getValue();
+
+        int linha = 0;
+        int coluna = diaDaSemana - 1;
+
+        for (int dia = 1; dia <= diasNoMes; dia++) {
+            if (model.getRowCount() <= linha) {
+                model.addRow(new Object[]{null, null, null, null, null, null, null});
+            }
+            model.setValueAt(dia, linha, coluna);
+            coluna = (coluna + 1) % 7;
+            if (coluna == 0) {
+                linha++;
+            }
+        }
+
+        lblMes.setText(obterNomeMes(mes));
+        lblAno.setText(Integer.toString(ano));
+        
+        lblEventoMes1.setText("Eventos de " + obterNomeMes(mes));
+        lblAnosEvento.setText("/ " + ano);
+    } 
+
+
+    private String obterNomeMes(int mes) {
+        String[] nomesMeses = {
+            "Janeiro", "Fevereiro", "Março", "Abril",
+            "Maio", "Junho", "Julho", "Agosto",
+            "Setembro", "Outubro", "Novembro", "Dezembro"
+        };
+        return nomesMeses[mes];
+    }
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {
+        mesAtual--;
+        if (mesAtual < 0) {
+            mesAtual = 11;
+            anoAtual--;
+        }
+        atualizarCalendario(anoAtual, mesAtual);
+    }
+
+    private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {
+        mesAtual++;
+        if (mesAtual > 11) {
+            mesAtual = 0;
+            anoAtual++;
+        }
+        atualizarCalendario(anoAtual, mesAtual);
+    } 
+
+    private void btnManualDoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        // TODO add your handling code here:
+    }                                                  
+
+    private void btnConfiguracoesESuporteActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CalendarioTeste().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnConfiguracoesESuporte;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnManualDoUsuario;
+    private javax.swing.JButton btnProximo;
+    private javax.swing.JButton btnSobreNos;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> jcbAnos;
+    private javax.swing.JComboBox<String> jcbMeses;
+    private javax.swing.JPanel jpnCalendario;
+    private javax.swing.JPanel jpnMenuBranco;
+    private javax.swing.JPanel jpnPainelComInformacoes;
+    private javax.swing.JPanel jpnPainelComOCalendario;
+    private javax.swing.JTable jtbCalendario;
+    private javax.swing.JTable jtbTabelaComEventosDoDia;
+    private javax.swing.JLabel lblAno;
+    private javax.swing.JLabel lblAnoo;
+    private javax.swing.JLabel lblAnosEvento;
+    private javax.swing.JLabel lblCalendario;
+    private javax.swing.JLabel lblEventoMes1;
+    private javax.swing.JLabel lblMes;
+    private javax.swing.JLabel lblMess;
+    private javax.swing.JLabel lblTaskTide;
+    private javax.swing.JLabel lblTracinho;
+    // End of variables declaration                   
+}

@@ -317,7 +317,7 @@ public class TelaInicialView extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	this.dispose();
-		new AluguelServicos().setVisible(true); // Voltar para a tela de Menu
+		new AluguelServico().setVisible(true); // Voltar para a tela de Menu
 	}  
 
     private void btnAssociadosActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -327,7 +327,7 @@ public class TelaInicialView extends javax.swing.JFrame {
 
     private void btnFinancasActionPerformed(java.awt.event.ActionEvent evt) {                                            
     	this.dispose();
-		new OrcamentoEvento().setVisible(true); // Voltar para a tela de Menu 
+		new OrcamentoEventoView().setVisible(true); // Voltar para a tela de Menu 
     }                                           
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             

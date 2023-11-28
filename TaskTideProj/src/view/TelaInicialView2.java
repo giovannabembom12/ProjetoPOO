@@ -317,7 +317,7 @@ public class TelaInicialView2 extends javax.swing.JFrame {
 
     private void btnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {                                             
     	this.dispose();
-		new OrcamentoEvento().setVisible(true); // Voltar para a tela de Menu
+		new OrcamentoEventoView().setVisible(true); // Voltar para a tela de Menu
 	}                                                   
 
     private void btnFinancasActionPerformed(java.awt.event.ActionEvent evt) {                                            
